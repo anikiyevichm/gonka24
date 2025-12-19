@@ -1,24 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Header } from './components/ui/Header';
+import { Hero } from './components/sections/Hero';
+import { About } from './components/sections/About';
+import { Infrastructure } from './components/sections/Infrastructure';
+import { Background3D } from './components/ui/Background3D';
+import { Pricing } from './components/sections/Pricing';
+import { Videos } from './components/sections/Videos';
+import { Risks } from './components/sections/Risks';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen text-white font-sans selection:bg-primary/30 relative">
+      <Background3D />
+      <Header />
+      <main className="relative z-10">
+        <Hero />
+        <About />
+        <Infrastructure />
+        <Pricing />
+        <Videos />
+        <Risks />
+      </main>
+      <footer className="py-10 text-center text-gray-500 text-sm border-t border-white/10 bg-black/80 backdrop-blur-md">
+        <div className="container mx-auto px-4">
+          <p className="mb-2">© 2024 GONKA Mining. All rights reserved.</p>
+          <p className="text-xs text-gray-600">Оплата: Предоплата за 1 месяц. Реквизиты будут предоставлены.</p>
+        </div>
+      </footer>
     </div>
   );
 }
