@@ -18,7 +18,6 @@ export const Header = () => {
   const navLinks = [
     { name: "О GONKA", href: "#about" },
     { name: "Тарифы", href: "#pricing" },
-    { name: "Гарантии", href: "#guarantees" },
     { name: "FAQ", href: "#faq" },
   ];
 
@@ -32,7 +31,7 @@ export const Header = () => {
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-2 text-primary font-mono font-bold text-xl tracking-tighter">
           <Cpu className="w-8 h-8" />
-          <span>GONKA<span className="text-white">.AI</span></span>
+          <span>GONKA<span className="text-white">24</span></span>
         </div>
 
         {/* Desktop Nav */}
