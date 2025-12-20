@@ -22,11 +22,30 @@ function Model({ path }: { path: string }) {
 
 function CameraRig() {
   const currentProgress = useRef(0);
+  const scrollHeight = useRef(0);
+
+  // Update scrollHeight only when body size changes to avoid layout thrashing
+  React.useEffect(() => {
+    const updateHeight = () => {
+      scrollHeight.current = document.body.scrollHeight - window.innerHeight;
+    };
+
+    // Initial measure
+    updateHeight();
+
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(document.body);
+
+    return () => observer.disconnect();
+  }, []);
 
   useFrame((state, delta) => {
     const scrollY = window.scrollY;
-    const height = document.body.scrollHeight - window.innerHeight;
-    const rawProgress = Math.min(Math.max(scrollY / height, 0), 1);
+    // Use cached height
+    const height = scrollHeight.current;
+
+    // Prevent division by zero if height is 0 (though rare)
+    const rawProgress = height > 0 ? Math.min(Math.max(scrollY / height, 0), 1) : 0;
 
     // 1. Ease-in-out the target (S-curve)
     const targetProgress = THREE.MathUtils.smoothstep(rawProgress, 0, 1);
