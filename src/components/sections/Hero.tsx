@@ -32,8 +32,8 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-tight"
         >
-          Аренда <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">GPU-ноды</span><br />
-          для майнинга будущего
+          Gonka Node с весом 2000+<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">промышленная мощность</span> за $8/час
         </motion.h1>
 
         <motion.p
@@ -42,8 +42,8 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl text-gray-400 max-w-2xl mx-auto mb-10"
         >
-          Подключайтесь к децентрализованной сети AI-вычислений GONKA.
-          Полностью "под ключ": настройка, запуск и поддержка.
+          Оптимизированные под Gonka GPU снижают стоимость майнинга до $1 за GNK.
+          Мы предлагаем решение "под ключ": настройка, запуск и поддержка 24/7.
         </motion.p>
 
         <motion.div
@@ -52,12 +52,18 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button className="w-full sm:w-auto px-8 py-4 bg-primary text-black font-bold text-lg rounded hover:bg-primary/90 transition-all flex items-center justify-center gap-2 group">
+          <button
+            onClick={() => {
+              if (window.innerWidth < 768) {
+                window.open('https://tally.so/r/RGdRaQ', '_blank');
+              } else {
+                window.Tally?.openPopup('RGdRaQ');
+              }
+            }}
+            className="w-full sm:w-auto px-8 py-4 bg-primary text-black font-bold text-lg rounded hover:bg-primary/90 transition-all flex items-center justify-center gap-2 group"
+          >
             Начать майнинг
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
-          <button className="w-full sm:w-auto px-8 py-4 bg-white/10 text-white font-bold text-lg rounded hover:bg-white/20 transition-all border border-white/10">
-            Как это работает?
           </button>
         </motion.div>
 

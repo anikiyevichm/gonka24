@@ -7,20 +7,30 @@ export const Risks = () => {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12">
 
-          {/* Risks */}
           <div>
-            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-              <AlertTriangle className="text-yellow-500" /> Риски
+            <h3 className="text-3xl font-bold text-white mb-4">
+              Наша позиция — честно и заранее
             </h3>
-            <div className="bg-yellow-500/10 border border-yellow-500/20 p-6 rounded-xl">
-              <p className="text-gray-300 text-sm mb-4">
-                Пожалуйста, учитывайте специфику крипторынка:
-              </p>
-              <ul className="space-y-2 list-disc list-inside text-gray-400 text-sm">
-                <li>Доходность в долларовом эквиваленте не гарантирована.</li>
-                <li>Цена токена GNK волатильна и может меняться.</li>
-              </ul>
+            <p className="text-gray-300 mb-8 max-w-lg">
+              Мы считаем важным <span className="font-bold text-white">сразу и открыто</span> предупредить о рисках, связанных с крипторынком.
+            </p>
+
+            <div className="flex items-center gap-2 mb-4">
+              <AlertTriangle className="text-yellow-500 w-6 h-6" />
+              <h4 className="text-xl font-bold text-white">Риски</h4>
             </div>
+
+            <p className="text-gray-300 text-sm mb-4">
+              Пожалуйста, учитывайте специфику крипторынка:
+            </p>
+            <ul className="space-y-3 list-disc list-inside text-gray-300 text-sm">
+              <li>
+                <span className="font-bold text-white">Доходность не гарантирована.</span>
+              </li>
+              <li>
+                <span className="font-bold text-white">Цена токена GNK волатильна и</span> <span className="font-bold text-white">может как расти, так и снижаться.</span>
+              </li>
+            </ul>
           </div>
 
           {/* Insights / Why Now */}

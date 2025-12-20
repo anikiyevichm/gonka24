@@ -7,6 +7,8 @@ import { Background3D } from './components/ui/Background3D';
 import { Pricing } from './components/sections/Pricing';
 import { Videos } from './components/sections/Videos';
 import { Risks } from './components/sections/Risks';
+import { Resources } from './components/sections/Resources';
+import { FAQ } from './components/sections/FAQ';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Pricing />
         <Videos />
         <Risks />
+        <FAQ />
+        <Resources />
       </main>
       <footer className="py-10 text-center text-gray-500 text-sm border-t border-white/10 bg-black/80 backdrop-blur-md">
         <div className="container mx-auto px-4">
