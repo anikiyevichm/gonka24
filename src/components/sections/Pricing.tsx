@@ -1,8 +1,10 @@
 import React from "react";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTally } from "../../hooks/useTally";
 
 export const Pricing = () => {
+  const { openTally } = useTally();
   return (
     <section id="pricing" className="py-20 relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/5 via-black/50 to-black/80 opacity-50" />
@@ -50,7 +52,7 @@ export const Pricing = () => {
             </div>
 
             <button
-              onClick={() => window.Tally?.openPopup('RGdRaQ', { hiddenFields: { plan: '1_month' } })}
+              onClick={() => openTally({ hiddenFields: { plan: '1_month' } })}
               className="w-full py-4 bg-white/10 text-white font-bold rounded-lg hover:bg-white/20 transition-colors border border-white/10"
             >
               Выбрать
@@ -93,7 +95,7 @@ export const Pricing = () => {
             </div>
 
             <button
-              onClick={() => window.Tally?.openPopup('RGdRaQ', { hiddenFields: { plan: '2_months' } })}
+              onClick={() => openTally({ hiddenFields: { plan: '2_months' } })}
               className="w-full py-4 bg-primary text-black font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(34,197,94,0.3)]"
             >
               Арендовать Ноду
@@ -133,7 +135,7 @@ export const Pricing = () => {
             </div>
 
             <button
-              onClick={() => window.Tally?.openPopup('RGdRaQ', { hiddenFields: { plan: '3_months' } })}
+              onClick={() => openTally({ hiddenFields: { plan: '3_months' } })}
               className="w-full py-4 bg-white/10 text-white font-bold rounded-lg hover:bg-white/20 transition-colors border border-white/10"
             >
               Выбрать

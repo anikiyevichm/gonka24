@@ -1,5 +1,5 @@
 import React, { Suspense, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF, Environment, Float } from "@react-three/drei";
 import * as THREE from "three";
 import { isMobile } from "react-device-detect";
@@ -10,9 +10,6 @@ const MODEL_PATH = isMobile ? "/models/scene.glb" : "/models/scene4k.glb";
 function Model({ path }: { path: string }) {
   const { scene } = useGLTF(path);
 
-  // Center and scale model if needed (RTX 3090 tends to be large or small depending on export)
-  // We can auto-scale or just rely on manual adjustments. 
-  // Let's assume standard scale for now, but usually they need slight adjustment.
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       <primitive object={scene} scale={1} />
@@ -21,37 +18,52 @@ function Model({ path }: { path: string }) {
 }
 
 function CameraRig() {
+  const { size } = useThree();
   const currentProgress = useRef(0);
   const scrollHeight = useRef(0);
 
-  // Update scrollHeight only when body size changes to avoid layout thrashing
-  React.useEffect(() => {
-    const updateHeight = () => {
-      scrollHeight.current = document.body.scrollHeight - window.innerHeight;
+  // Store the stable height, updating only on horizontal resize
+  const fixedHeight = useRef(size.height);
+  const lastWidth = useRef(size.width);
+
+  // 1. Handle Window/Canvas Resizes (Smart logic via R3F useThree)
+  React.useLayoutEffect(() => {
+    // Only update the fixed height if width changes (e.g. rotation)
+    // This prevents jitter from mobile address bar toggling (vertical resize)
+    if (Math.abs(size.width - lastWidth.current) > 1) {
+      lastWidth.current = size.width;
+      fixedHeight.current = size.height;
+    }
+
+    // Recalculate scrollHeight with the stable fixedHeight
+    // Note: We access body directly as useThree doesn't track DOM body size
+    scrollHeight.current = document.body.scrollHeight - fixedHeight.current;
+  }, [size.width, size.height]);
+
+  // 2. Handle Body Content Resizes (Dynamic content)
+  React.useLayoutEffect(() => {
+    const updateScrollHeight = () => {
+      // Always recalculate using the currently stored fixedHeight
+      scrollHeight.current = document.body.scrollHeight - fixedHeight.current;
     };
 
-    // Initial measure
-    updateHeight();
-
-    const observer = new ResizeObserver(updateHeight);
+    const observer = new ResizeObserver(updateScrollHeight);
     observer.observe(document.body);
-
     return () => observer.disconnect();
   }, []);
 
   useFrame((state, delta) => {
     const scrollY = window.scrollY;
-    // Use cached height
+    // Use cached, stable height
     const height = scrollHeight.current;
 
-    // Prevent division by zero if height is 0 (though rare)
+    // Prevent division by zero
     const rawProgress = height > 0 ? Math.min(Math.max(scrollY / height, 0), 1) : 0;
 
     // 1. Ease-in-out the target (S-curve)
     const targetProgress = THREE.MathUtils.smoothstep(rawProgress, 0, 1);
 
     // 2. Damp towards target (Physics-like smoothing)
-    // Lambda 1.5 = very smooth/heavy. 
     currentProgress.current = THREE.MathUtils.damp(currentProgress.current, targetProgress, 1.5, delta);
 
     const radius = 9;
@@ -70,12 +82,21 @@ function CameraRig() {
 
 export const Background3D = () => {
   return (
-    <div className="fixed inset-0 z-[-1] bg-black">
+    // CSS-stabilization: 
+    // 1. Convert to fixed top-0 left-0 w-full (remove inset-0)
+    // 2. Use 100lvh to ensure container height ignores mobile browser UI
+    <div
+      className="fixed top-0 left-0 w-full z-[-1] bg-black"
+      style={{ height: '100lvh' }}
+    >
       <Canvas
         shadows
         dpr={[1, 2]}
         camera={{ position: [0, 0, 10], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
+        // Smart Resize: The container assumes 100lvh, preventing resize on vertical UI shift.
+        // We can explicitly disable scroll-based resize behavior if needed, but R3F defaults are usually fine
+        // provided the container is stable.
         className="w-full h-full"
       >
         <Suspense fallback={null}>
@@ -84,7 +105,7 @@ export const Background3D = () => {
           <pointLight position={[-10, -10, -10]} intensity={1} />
 
           <Model path={MODEL_PATH} />
-          <Environment preset="city" /> {/* Nice reflections */}
+          <Environment preset="city" />
           <CameraRig />
         </Suspense>
       </Canvas>

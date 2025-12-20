@@ -9,6 +9,7 @@ import { Videos } from './components/sections/Videos';
 import { Risks } from './components/sections/Risks';
 import { Resources } from './components/sections/Resources';
 import { FAQ } from './components/sections/FAQ';
+import { CallToAction } from './components/sections/CallToAction';
 
 function App() {
   return (
@@ -24,10 +25,11 @@ function App() {
         <Risks />
         <FAQ />
         <Resources />
+        <CallToAction />
       </main>
       <footer className="py-10 text-center text-gray-500 text-sm border-t border-white/10 bg-black/80 backdrop-blur-md">
         <div className="container mx-auto px-4">
-          <p className="mb-2">© 2024 GONKA Mining. All rights reserved.</p>
+          <p className="mb-2">© 2025 GONKA Mining. All rights reserved.</p>
           <p className="text-xs text-gray-600">Оплата: Предоплата за 1 месяц. Реквизиты будут предоставлены.</p>
         </div>
       </footer>

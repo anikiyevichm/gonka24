@@ -2,7 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Zap, ShieldCheck, Coins } from "lucide-react";
 
+import { useTally } from "../../hooks/useTally";
+
 export const Hero = () => {
+  const { openTally } = useTally();
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Grid/Matrix Effect - Adjusted opacity */}
@@ -53,18 +56,13 @@ export const Hero = () => {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <button
-            onClick={() => {
-              if (window.innerWidth < 768) {
-                window.open('https://tally.so/r/RGdRaQ', '_blank');
-              } else {
-                window.Tally?.openPopup('RGdRaQ');
-              }
-            }}
+            onClick={() => openTally()}
             className="w-full sm:w-auto px-8 py-4 bg-primary text-black font-bold text-lg rounded hover:bg-primary/90 transition-all flex items-center justify-center gap-2 group"
           >
             Начать майнинг
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
+
         </motion.div>
 
         <motion.div

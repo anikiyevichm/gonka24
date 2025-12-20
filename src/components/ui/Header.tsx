@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Menu, X, Cpu } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTally } from "../../hooks/useTally";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { openTally } = useTally();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +47,10 @@ export const Header = () => {
               {link.name}
             </a>
           ))}
-          <button className="bg-primary text-black px-5 py-2 rounded font-bold hover:bg-primary/90 transition-transform active:scale-95">
+          <button
+            onClick={() => openTally()}
+            className="bg-primary text-black px-5 py-2 rounded font-bold hover:bg-primary/90 transition-transform active:scale-95"
+          >
             Подключиться
           </button>
         </nav>
@@ -79,7 +84,13 @@ export const Header = () => {
                   {link.name}
                 </a>
               ))}
-              <button className="bg-primary text-black px-5 py-3 rounded font-bold w-full">
+              <button
+                onClick={() => {
+                  openTally();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="bg-primary text-black px-5 py-3 rounded font-bold w-full"
+              >
                 Подключиться
               </button>
             </nav>
