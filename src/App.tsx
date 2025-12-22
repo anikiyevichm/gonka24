@@ -11,7 +11,19 @@ import { Resources } from './components/sections/Resources';
 import { FAQ } from './components/sections/FAQ';
 import { CallToAction } from './components/sections/CallToAction';
 
+// Lazy load dev tools to exclude from production bundle
+const ModelDebugger = React.lazy(() => import('./components/dev/ModelDebugger'));
+
 function App() {
+  // Only enable in development mode
+  if (process.env.NODE_ENV === 'development' && window.location.pathname === '/dev/3d') {
+    return (
+      <React.Suspense fallback={null}>
+        <ModelDebugger />
+      </React.Suspense>
+    );
+  }
+
   return (
     <div className="min-h-screen text-white font-sans selection:bg-primary/30 relative">
       <Background3D />

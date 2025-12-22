@@ -16,6 +16,7 @@
     "@types/three": "^0.182.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.26",
+    "leva": "^0.10.1",
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-device-detect": "^2.2.3",

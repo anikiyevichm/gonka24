@@ -7,17 +7,44 @@ import { isMobile } from "react-device-detect";
 // Select model based on device type
 const MODEL_PATH = isMobile ? "/models/scene.glb" : "/models/scene4k.glb";
 
-function Model({ path }: { path: string }) {
+// Define overrides interface
+export interface Background3DOverrides {
+  modelRotation?: [number, number, number];
+  modelScale?: number;
+  cameraRadius?: number;
+  disableFloat?: boolean;
+}
+
+interface ModelProps {
+  path: string;
+  rotation?: [number, number, number];
+  scale?: number;
+  disableFloat?: boolean;
+}
+
+function Model({ path, rotation, scale = 1, disableFloat = false }: ModelProps) {
   const { scene } = useGLTF(path);
+
+  const content = (
+    <primitive
+      object={scene}
+      scale={scale}
+      rotation={rotation || [0.285, 0.871, 0.600]}
+    />
+  );
+
+  if (disableFloat) {
+    return content;
+  }
 
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-      <primitive object={scene} scale={1} />
+      {content}
     </Float>
   );
 }
 
-function CameraRig() {
+function CameraRig({ radius = 9 }: { radius?: number }) {
   const { size } = useThree();
   const currentProgress = useRef(0);
   const scrollHeight = useRef(0);
@@ -66,11 +93,12 @@ function CameraRig() {
     // 2. Damp towards target (Physics-like smoothing)
     currentProgress.current = THREE.MathUtils.damp(currentProgress.current, targetProgress, 1.5, delta);
 
-    const radius = 9;
-    const angle = currentProgress.current * Math.PI * 2;
+    // Use radius from props
+    const r = radius;
+    const angle = -currentProgress.current * Math.PI * 2;
 
-    const x = Math.sin(angle) * radius;
-    const z = Math.cos(angle) * radius;
+    const x = Math.sin(angle) * r;
+    const z = Math.cos(angle) * r;
     const y = 0;
 
     state.camera.position.set(x, y, z);
@@ -80,7 +108,11 @@ function CameraRig() {
   return null;
 }
 
-export const Background3D = () => {
+interface Background3DProps {
+  overrides?: Background3DOverrides;
+}
+
+export const Background3D = ({ overrides }: Background3DProps) => {
   return (
     // CSS-stabilization: 
     // 1. Convert to fixed top-0 left-0 w-full (remove inset-0)
@@ -104,9 +136,14 @@ export const Background3D = () => {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
           <pointLight position={[-10, -10, -10]} intensity={1} />
 
-          <Model path={MODEL_PATH} />
+          <Model
+            path={MODEL_PATH}
+            rotation={overrides?.modelRotation}
+            scale={overrides?.modelScale}
+            disableFloat={overrides?.disableFloat}
+          />
           <Environment preset="city" />
-          <CameraRig />
+          <CameraRig radius={overrides?.cameraRadius} />
         </Suspense>
       </Canvas>
 
