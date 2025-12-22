@@ -1,10 +1,16 @@
 import React from 'react';
 import { Background3D, Background3DOverrides } from '../ui/Background3D';
-// @ts-ignore - leva might not have types installed or detected yet
-import { useControls, folder } from 'leva';
+// @ts-ignore - leva might not have types installed
+import { useControls, folder, button } from 'leva';
+import { useState } from 'react';
 
 export const ModelDebugger = () => {
-  const { rotationX, rotationY, rotationZ, scale, radius, disableFloat } = useControls({
+  const [key, setKey] = useState(0);
+
+  const {
+    rotationX, rotationY, rotationZ, scale, radius, disableFloat,
+    entEnabled, entRotY, entRotX, entZ, entDamping, entPivot, entDelay
+  } = useControls({
     Model: folder({
       rotationX: { value: Math.PI / 4, min: -Math.PI, max: Math.PI, step: 0.1 },
       rotationY: { value: Math.PI / 2, min: -Math.PI, max: Math.PI, step: 0.1 },
@@ -15,6 +21,16 @@ export const ModelDebugger = () => {
     Camera: folder({
       radius: { value: 9, min: 1, max: 20, step: 0.1 },
     }),
+    Entrance: folder({
+      entEnabled: { value: true, label: 'Enabled' },
+      entRotY: { value: -3.142, min: -Math.PI * 2, max: Math.PI * 2, step: 0.1, label: 'Start Rot Y' },
+      entRotX: { value: -0.942, min: -Math.PI, max: Math.PI, step: 0.1, label: 'Start Rot X' },
+      entZ: { value: -20, min: -50, max: 20, step: 1, label: 'Start Z' },
+      entDamping: { value: 1, min: 0.1, max: 5, step: 0.1, label: 'Damping (Speed)' },
+      entPivot: { value: 0.5, min: 0, max: 1, step: 0.1, label: 'Pivot Y (0=Center, 1=Top)' },
+      entDelay: { value: 500, min: 0, max: 2000, step: 100, label: 'Start Delay (ms)' },
+      'Restart Animation': button(() => setKey((k) => k + 1)),
+    })
   });
 
   const overrides: Background3DOverrides = {
@@ -22,6 +38,16 @@ export const ModelDebugger = () => {
     modelScale: scale,
     cameraRadius: radius,
     disableFloat,
+    entrance: {
+      enabled: entEnabled,
+      startRotationY: entRotY,
+      startRotationX: entRotX,
+      startZ: entZ,
+      damping: entDamping,
+      pivotOffsetFactor: entPivot,
+      delay: entDelay,
+    },
+    animationKey: key,
   };
 
   const codeSnippet = `
@@ -29,12 +55,15 @@ export const ModelDebugger = () => {
 // Model Scale: ${scale}
 // Camera Radius: ${radius}
 
-/* Copy this to Background3D.tsx Model component: */
-rotation={[${rotationX.toFixed(3)}, ${rotationY.toFixed(3)}, ${rotationZ.toFixed(3)}]}
-scale={${scale}}
-
-/* Copy this to Background3D.tsx CameraRig component: */
-const radius = ${radius};
+/* Copy to Background3D EntranceAnimation config: */
+config={{
+  enabled: ${entEnabled},
+  startRotationY: ${entRotY.toFixed(3)}, // ${(entRotY / Math.PI).toFixed(2)} * PI
+  startRotationX: ${entRotX.toFixed(3)}, // ${(entRotX / Math.PI).toFixed(2)} * PI
+  startZ: ${entZ},
+  damping: ${entDamping},
+  pivotOffsetFactor: ${entPivot},
+}}
 `;
 
   return (

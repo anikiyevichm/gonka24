@@ -7,12 +7,27 @@ import { isMobile } from "react-device-detect";
 // Select model based on device type
 const MODEL_PATH = isMobile ? "/models/scene.glb" : "/models/scene4k.glb";
 
+
+
+// Define animation configuration interface
+export interface EntranceConfig {
+  startRotationY?: number;
+  startRotationX?: number;
+  startZ?: number;
+  damping?: number;
+  pivotOffsetFactor?: number;
+  enabled?: boolean;
+  delay?: number;
+}
+
 // Define overrides interface
 export interface Background3DOverrides {
   modelRotation?: [number, number, number];
   modelScale?: number;
   cameraRadius?: number;
   disableFloat?: boolean;
+  entrance?: EntranceConfig;
+  animationKey?: number;
 }
 
 interface ModelProps {
@@ -41,6 +56,113 @@ function Model({ path, rotation, scale = 1, disableFloat = false }: ModelProps) 
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       {content}
     </Float>
+  );
+}
+
+function EntranceAnimation({ children, config = {}, animationKey }: { children: React.ReactNode, config?: EntranceConfig, animationKey?: number }) {
+  const pivotGroup = useRef<THREE.Group>(null);
+  const contentGroup = useRef<THREE.Group>(null);
+  const { viewport } = useThree();
+
+  // Default Config
+  const finalConfig = {
+    startRotationY: -3.142,
+    startRotationX: -0.942,
+    startZ: -20,
+    damping: 1,
+    pivotOffsetFactor: 0.5, // 0.5 = half height (top)
+    enabled: true,
+    delay: 500, // ms delay before starting
+    ...config
+  };
+
+  const pivotY = viewport.height * (finalConfig.pivotOffsetFactor ?? 0.5);
+
+  // Animation state refs
+  const progress = useRef(0);
+  const [active, setActive] = React.useState(false);
+
+  // Reset progress when animationKey changes bounds
+  React.useEffect(() => {
+    progress.current = 0;
+    setActive(false);
+
+    const timer = setTimeout(() => {
+      setActive(true);
+    }, finalConfig.delay ?? 500);
+
+    return () => clearTimeout(timer);
+  }, [animationKey, finalConfig.delay]); // Re-run if key or delay changes
+
+  useFrame((state, delta) => {
+    if (!pivotGroup.current || !contentGroup.current) return;
+
+    // If disabled, force progress to 1 (end state) immediately
+    if (!finalConfig.enabled) {
+      if (progress.current !== 1) {
+        progress.current = 1;
+        // Reset Pivot
+        pivotGroup.current.position.y = pivotY;
+        pivotGroup.current.rotation.x = 0;
+        pivotGroup.current.rotation.y = 0;
+
+        // Reset Content
+        contentGroup.current.rotation.y = 0;
+        contentGroup.current.position.z = 0;
+      }
+    } else {
+      // Only start damping if active (delay passed)
+      // If not active, target is 0 (stay at start)
+      const target = active ? 1 : 0;
+
+      // Force progress to 0 if not active yet (to prevent any creep)
+      if (!active) progress.current = 0;
+
+      // Smoothly interpolate progress
+      if (active) {
+        progress.current = THREE.MathUtils.damp(progress.current, 1, finalConfig.damping ?? 0.5, delta);
+      }
+    }
+
+    // Inverted progress (1 -> 0)
+    const rev = 1 - progress.current;
+
+    // Rotation & Position Logic
+
+    // 1. Pivot Group (Handles Swing/Arc from Top)
+    // Pivot is at [0, pivotY, 0].
+    pivotGroup.current.position.y = pivotY;
+    pivotGroup.current.position.x = 0;
+
+    // Rotate X (Swing down) applies to the Pivot
+    pivotGroup.current.rotation.x = (finalConfig.startRotationX ?? 0) * rev;
+
+    // Note: We DO NOT rotate Y on the pivot anymore to avoid the "wide orbit".
+    pivotGroup.current.rotation.y = 0;
+    pivotGroup.current.position.z = 0;
+
+    // 2. Content Group (Handles Local Spin & Z-depth)
+    // Local Spin (Y-axis) -> Spinds around ITSELF, not the pivot.
+    contentGroup.current.rotation.y = (finalConfig.startRotationY ?? 0) * rev;
+
+    // Z-translation (Fly in distance)
+    contentGroup.current.position.z = (finalConfig.startZ ?? 0) * rev;
+  });
+
+  return (
+    <group ref={pivotGroup}>
+      {/* 
+        Pivot Group: Located at Top Center (0, pivotY, 0).
+        Inner Group: Located at (0, -pivotY, 0) relative to Pivot.
+        This places the Inner Group at (0, 0, 0) in World Space when rotations are 0.
+      */}
+      <group position={[0, -pivotY, 0]}>
+        {/* Extra wrapper for local transformations (Spin, Z-fly) */}
+        <group ref={contentGroup}>
+          {children}
+        </group>
+      </group>
+    </group>
   );
 }
 
@@ -136,12 +258,14 @@ export const Background3D = ({ overrides }: Background3DProps) => {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
           <pointLight position={[-10, -10, -10]} intensity={1} />
 
-          <Model
-            path={MODEL_PATH}
-            rotation={overrides?.modelRotation}
-            scale={overrides?.modelScale}
-            disableFloat={overrides?.disableFloat}
-          />
+          <EntranceAnimation config={overrides?.entrance} animationKey={overrides?.animationKey}>
+            <Model
+              path={MODEL_PATH}
+              rotation={overrides?.modelRotation}
+              scale={overrides?.modelScale}
+              disableFloat={overrides?.disableFloat}
+            />
+          </EntranceAnimation>
           <Environment preset="city" />
           <CameraRig radius={overrides?.cameraRadius} />
         </Suspense>
