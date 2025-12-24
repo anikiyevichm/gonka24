@@ -35,8 +35,8 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-tight"
         >
-          Gonka Node с весом 2000+<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">промышленная мощность</span> за $8/час
+          Арендуйте NVIDIA H200 для Gonka<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">на 30% дешевле облачных цен</span>
         </motion.h1>
 
         <motion.p

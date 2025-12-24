@@ -18,14 +18,37 @@ export const useTally = () => {
 
       window.open(url, '_blank');
     } else {
-      window.Tally?.openPopup(formId, {
-        hiddenFields: options?.hiddenFields,
-        width: 700,
-        emoji: {
-          text: '👋',
-          animation: 'wave'
+      // Desktop/Tablet: Try Tally Modal first (best experience)
+      if (window.Tally) {
+        window.Tally.openPopup(formId, {
+          hiddenFields: options?.hiddenFields,
+          layout: 'modal',
+          overlay: true,
+          width: 700,
+          emoji: {
+            text: '👋',
+            animation: 'wave'
+          }
+        });
+      } else {
+        // Fallback: Centered Popup Window
+        const width = 700;
+        const height = 800;
+        const left = window.screen.width / 2 - width / 2;
+        const top = window.screen.height / 2 - height / 2;
+
+        let url = `https://tally.so/r/${formId}`;
+        if (options?.hiddenFields) {
+          const params = new URLSearchParams(options.hiddenFields);
+          url += `?${params.toString()}`;
         }
-      });
+
+        window.open(
+          url,
+          'GonkaConnect',
+          `width=${width},height=${height},left=${left},top=${top},resizable=yes,scrollbars=yes,status=yes`
+        );
+      }
     }
   }, []);
 

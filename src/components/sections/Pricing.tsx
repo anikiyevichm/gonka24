@@ -13,6 +13,9 @@ export const Pricing = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
             Стоимость и условия
           </h2>
+          <p className="text-xl md:text-2xl text-primary font-medium mb-6">
+            AI-кластер на базе 8× NVIDIA H200 GPU готовый к майнингу
+          </p>
           <p className="text-gray-400 text-lg">
             <span className="font-bold text-white">Чем дольше аренда — тем ниже цена за час</span>
           </p>

@@ -6,7 +6,7 @@ import { Infrastructure } from './components/sections/Infrastructure';
 import { Background3D } from './components/ui/Background3D';
 import { Pricing } from './components/sections/Pricing';
 import { Videos } from './components/sections/Videos';
-import { Risks } from './components/sections/Risks';
+
 import { Resources } from './components/sections/Resources';
 import { FAQ } from './components/sections/FAQ';
 import { CallToAction } from './components/sections/CallToAction';
@@ -34,7 +34,7 @@ function App() {
         <Infrastructure />
         <Pricing />
         <Videos />
-        <Risks />
+
         <FAQ />
         <Resources />
         <CallToAction />
