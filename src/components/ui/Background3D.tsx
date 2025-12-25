@@ -113,7 +113,7 @@ function EntranceAnimation({ children, config = {}, animationKey }: { children: 
     } else {
       // Only start damping if active (delay passed)
       // If not active, target is 0 (stay at start)
-      const target = active ? 1 : 0;
+
 
       // Force progress to 0 if not active yet (to prevent any creep)
       if (!active) progress.current = 0;
