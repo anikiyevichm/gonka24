@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Server, TrendingUp, Zap, Cpu } from "lucide-react";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export const Infrastructure = () => {
+  const { t } = useLanguage();
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
@@ -13,7 +15,7 @@ export const Infrastructure = () => {
             viewport={{ once: true }}
             className="text-3xl md:text-5xl font-bold text-white mb-6"
           >
-            Инфраструктура <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Промышленного Уровня</span>
+            {t.infrastructure.title} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.infrastructure.title_accent}</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -22,7 +24,7 @@ export const Infrastructure = () => {
             transition={{ delay: 0.1 }}
             className="text-gray-400 max-w-2xl mx-auto text-lg"
           >
-            Почему аренда ноды у нас выгоднее, чем сборка собственной фермы.
+            {t.infrastructure.subtitle}
           </motion.p>
         </div>
 
@@ -42,15 +44,13 @@ export const Infrastructure = () => {
                 <Server className="w-8 h-8" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-white mb-3">Bare Metal Эффективность</h3>
+                <h3 className="text-2xl font-bold text-white mb-3">{t.infrastructure.cards.metal.title}</h3>
                 <p className="text-gray-400 leading-relaxed mb-4">
-                  Мы предоставляем <span className="text-white font-medium">прямой доступ к железу</span> без слоев виртуализации.
-                  Ваша нода использует 100% ресурсов GPU.
-                  Домашние и облачные решения (AWS, Azure) теряют <strong>15-20%</strong> производительности на оверхед гипервизоров.
+                  {t.infrastructure.cards.metal.desc}
                 </p>
                 <div className="flex items-center gap-2 text-sm text-primary">
                   <Cpu className="w-4 h-4" />
-                  <span>Максимальный хешрейт без потерь</span>
+                  <span>{t.infrastructure.cards.metal.tag}</span>
                 </div>
               </div>
             </div>
@@ -71,15 +71,13 @@ export const Infrastructure = () => {
                 <TrendingUp className="w-8 h-8" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-white mb-3">Эффект Масштаба</h3>
+                <h3 className="text-2xl font-bold text-white mb-3">{t.infrastructure.cards.scale.title}</h3>
                 <p className="text-gray-400 leading-relaxed mb-4">
-                  Выгода достигается за счет объема. Мы закупаем оборудование и электроэнергию по 
-                  <span className="text-white font-medium"> оптовым промышленным тарифам</span>.
-                  Одиночному майнеру такие цены недоступны.
+                  {t.infrastructure.cards.scale.desc}
                 </p>
                 <div className="flex items-center gap-2 text-sm text-secondary">
                   <Zap className="w-4 h-4" />
-                  <span>Cost-reduction до 40%</span>
+                  <span>{t.infrastructure.cards.scale.tag}</span>
                 </div>
               </div>
             </div>

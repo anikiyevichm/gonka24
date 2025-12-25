@@ -3,11 +3,13 @@ import { Menu, X, Cpu } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTally } from "../../hooks/useTally";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { openTally } = useTally();
+  const { t, language, setLanguage } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,10 +20,28 @@ export const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: "О GONKA", href: "#about" },
-    { name: "Тарифы", href: "#pricing" },
-    { name: "FAQ", href: "#faq" },
+    { name: t.header.nav.about, href: "#about" },
+    { name: t.header.nav.pricing, href: "#pricing" },
+    { name: t.header.nav.faq, href: "#faq" },
   ];
+
+  const LanguageSwitcher = ({ mobile = false }: { mobile?: boolean }) => (
+    <div className={cn("flex items-center gap-2 text-sm font-medium", mobile ? "justify-center mt-4" : "")}>
+      <button
+        onClick={() => setLanguage('ru')}
+        className={cn("transition-colors", language === 'ru' ? 'text-primary font-bold' : 'text-gray-500 hover:text-white')}
+      >
+        RU
+      </button>
+      <span className="text-gray-700">/</span>
+      <button
+        onClick={() => setLanguage('en')}
+        className={cn("transition-colors", language === 'en' ? 'text-primary font-bold' : 'text-gray-500 hover:text-white')}
+      >
+        EN
+      </button>
+    </div>
+  );
 
   return (
     <header
@@ -31,7 +51,7 @@ export const Header = () => {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-primary font-mono font-bold text-xl tracking-tighter">
+        <div className="flex items-center gap-2 text-primary font-mono font-bold text-xl tracking-tighter cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
           <Cpu className="w-8 h-8" />
           <span>GONKA<span className="text-white">24</span></span>
         </div>
@@ -47,11 +67,12 @@ export const Header = () => {
               {link.name}
             </a>
           ))}
+          <LanguageSwitcher />
           <button
             onClick={() => openTally()}
             className="bg-primary text-black px-5 py-2 rounded font-bold hover:bg-primary/90 transition-transform active:scale-95"
           >
-            Подключиться
+            {t.header.cta}
           </button>
         </nav>
 
@@ -79,11 +100,12 @@ export const Header = () => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium text-gray-300 hover:text-primary"
+                  className="text-lg font-medium text-gray-300 hover:text-primary text-center"
                 >
                   {link.name}
                 </a>
               ))}
+              <LanguageSwitcher mobile />
               <button
                 onClick={() => {
                   openTally();
@@ -91,7 +113,7 @@ export const Header = () => {
                 }}
                 className="bg-primary text-black px-5 py-3 rounded font-bold w-full"
               >
-                Подключиться
+                {t.header.cta}
               </button>
             </nav>
           </motion.div>

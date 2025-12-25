@@ -1,11 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Zap, ShieldCheck, Coins } from "lucide-react";
-
 import { useTally } from "../../hooks/useTally";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export const Hero = () => {
   const { openTally } = useTally();
+  const { t } = useLanguage();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
       {/* Background Grid/Matrix Effect - Adjusted opacity */}
@@ -26,7 +28,7 @@ export const Hero = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
           </span>
-          Сеть GONKA Mainnet уже запущена
+          {t.hero.tag}
         </motion.div>
 
         <motion.h1
@@ -35,8 +37,8 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-tight"
         >
-          Арендуйте NVIDIA H200 для Gonka<br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">на 30% дешевле облачных цен</span>
+          {t.hero.title}<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">{t.hero.title_accent}</span>
         </motion.h1>
 
         <motion.p
@@ -45,8 +47,7 @@ export const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-xl text-gray-400 max-w-2xl mx-auto mb-10"
         >
-          Оптимизированные под Gonka GPU снижают стоимость майнинга до $1 за GNK.
-          Мы предлагаем решение "под ключ": настройка, запуск и поддержка 24/7.
+          {t.hero.description}
         </motion.p>
 
         <motion.div
@@ -59,7 +60,7 @@ export const Hero = () => {
             onClick={() => openTally()}
             className="w-full sm:w-auto px-8 py-4 bg-primary text-black font-bold text-lg rounded hover:bg-primary/90 transition-all flex items-center justify-center gap-2 group"
           >
-            Начать майнинг
+            {t.hero.cta}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
 
@@ -72,9 +73,9 @@ export const Hero = () => {
           className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto"
         >
           {[
-            { icon: Zap, label: "Готовое решение", desc: "Нода подключена к Mainnet" },
-            { icon: Coins, label: "Пассивный доход", desc: "Начисления в токенах GNK" },
-            { icon: ShieldCheck, label: "Гарантия", desc: "Компенсация при простое" },
+            { icon: Zap, label: t.hero.features.ready, desc: t.hero.features.ready_desc },
+            { icon: Coins, label: t.hero.features.passive, desc: t.hero.features.passive_desc },
+            { icon: ShieldCheck, label: t.hero.features.warranty, desc: t.hero.features.warranty_desc },
           ].map((item, i) => (
             <div key={i} className="flex flex-col items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
               <item.icon className="w-8 h-8 text-primary" />

@@ -1,43 +1,43 @@
 import React from "react";
 import { Youtube } from "lucide-react";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 export const Videos = () => {
-  const mediaItems = [
+  const { t } = useLanguage();
+
+  const mediaConfig = [
     {
       type: 'video',
       id: "wp7izqZmiWM",
-      title: "«Open AI — это пузырь»! Откровения из Кремниевой долины",
       source: "Александр Соколовский",
-      quote: "«Мы не создаем новое золото (как Биткоин), мы создаем топливо для AI будущего. Рынок AI-вычислений оценивается в десятки триллионов долларов.»"
     },
     {
       type: 'video',
       id: "J4dCu_HB5-M",
-      title: "Gonka Protocol's David Liberman on Decentralized AI",
       source: "Bitcoin.com",
-      quote: "«Централизованные игроки амортизируют GPU по 6 лет, а в крипте инновации обновляют железо каждый год. Децентрализация всегда выигрывает в скорости.»"
     },
     {
       type: 'article',
       url: "https://www.forbes.ru/tekhnologii/551177-bitfury-vlozit-v-obsej-sloznosti-50-mln-v-proekt-gonka-ai-brat-ev-libermanov",
-      title: "Bitfury вложит в общей сложности $50 млн в проект Gonka AI братьев Либерманов",
       source: "Forbes Russia",
-      quote: "«Владельцы GPU с помощью протокола Gonka могут сдавать их в аренду всем, кто нуждается в вычислительных мощностях для ИИ-проектов.»"
     },
     {
       type: 'article',
       url: "https://www.forbes.com/sites/kolawolesamueladebayo/2025/11/11/who-owns-the-future-of-compute-the-quest-to-make-ai-open-for-all/",
-      title: "Кто владеет будущим вычислений? Стремление сделать ИИ открытым для всех",
       source: "Forbes",
-      quote: "«Если ИИ — это новое электричество, то вычислительные мощности — это электросеть, питающая его. Тот, кто контролирует чипы, будет контролировать инновации следующего десятилетия.»"
     }
   ];
+
+  const mediaItems = mediaConfig.map((item, i) => ({
+    ...item,
+    ...t.videos.items[i]
+  }));
 
   return (
     <section id="media" className="py-20 relative border-t border-white/5">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 text-center">
-          Видео и <span className="text-primary">Интервью</span>
+          {t.videos.title} <span className="text-primary">{t.videos.title_accent}</span>
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -61,7 +61,7 @@ export const Videos = () => {
                       <div className="text-center p-6">
                         <span className="text-3xl font-serif text-white/50 mb-2 block">{item.source}</span>
                         <div className="px-6 py-2 border border-white/20 rounded-full text-white/70 text-sm group-hover/link:bg-white group-hover/link:text-black transition-all">
-                          Читать статью
+                            {t.videos.read_article}
                         </div>
                       </div>
                     </div>
