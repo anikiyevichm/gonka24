@@ -1,9 +1,12 @@
 import { useCallback } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 
 export const useTally = () => {
+  const { language } = useLanguage();
+
   const openTally = useCallback((options?: { hiddenFields?: Record<string, string> }) => {
-    const formId = 'RGdRaQ';
+    const formId = language === 'en' ? 'GxKa72' : 'RGdRaQ';
     const isMobile = window.innerWidth < 768;
 
     if (isMobile) {
@@ -50,7 +53,7 @@ export const useTally = () => {
         );
       }
     }
-  }, []);
+  }, [language]);
 
   return { openTally };
 };
