@@ -5,7 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTally } from "../../hooks/useTally";
 import { useLanguage } from "../../contexts/LanguageContext";
 
-export const Header = () => {
+interface HeaderProps {
+  customLinks?: { name: string; href: string }[];
+}
+
+export const Header = ({ customLinks }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { openTally } = useTally();
@@ -19,11 +23,13 @@ export const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
+  const defaultNavLinks = [
     { name: t.header.nav.about, href: "#about" },
     { name: t.header.nav.pricing, href: "#pricing" },
     { name: t.header.nav.faq, href: "#faq" },
   ];
+
+  const navLinks = customLinks || defaultNavLinks;
 
   const LanguageSwitcher = ({ mobile = false }: { mobile?: boolean }) => (
     <div className={cn("flex items-center gap-2 text-sm font-medium", mobile ? "justify-center mt-4" : "")}>

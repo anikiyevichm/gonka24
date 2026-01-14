@@ -3,9 +3,19 @@ import { ChevronDown, ChevronUp, HelpCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../../contexts/LanguageContext";
 
-export const FAQ = () => {
+interface FAQProps {
+  content?: {
+    title: string;
+    subtitle: string;
+    items: { q: string; a: string }[];
+  };
+}
+
+export const FAQ = ({ content }: FAQProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { t } = useLanguage();
+  const c = content || t.faq;
+
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -16,15 +26,15 @@ export const FAQ = () => {
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 flex items-center justify-center gap-3">
-            <HelpCircle className="text-primary w-8 h-8 md:w-10 md:h-10" /> {t.faq.title}
+            <HelpCircle className="text-primary w-8 h-8 md:w-10 md:h-10" /> {c.title}
           </h2>
           <p className="text-gray-400 text-lg">
-            {t.faq.subtitle}
+            {c.subtitle}
           </p>
         </div>
 
         <div className="space-y-4">
-          {t.faq.items.map((item, index) => (
+          {c.items.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 10 }}

@@ -1,53 +1,26 @@
-import React from 'react';
-import { Header } from './components/ui/Header';
-import { Hero } from './components/sections/Hero';
-import { About } from './components/sections/About';
-import { Infrastructure } from './components/sections/Infrastructure';
-import { Background3D } from './components/ui/Background3D';
-import { Pricing } from './components/sections/Pricing';
-import { Videos } from './components/sections/Videos';
-import { Resources } from './components/sections/Resources';
-import { FAQ } from './components/sections/FAQ';
-import { CallToAction } from './components/sections/CallToAction';
-import { useLanguage } from './contexts/LanguageContext';
-
-// Lazy load dev tools to exclude from production bundle
-const ModelDebugger = React.lazy(() => import('./components/dev/ModelDebugger'));
+import React, { useEffect, useState } from 'react';
+import { GonkaLanding } from './pages/GonkaLanding';
+import { SafeComputeLanding } from './pages/SafeComputeLanding';
 
 function App() {
-  const { t } = useLanguage();
+  const [isSafeCompute, setIsSafeCompute] = useState(false);
 
-  // Only enable in development mode
-  if (process.env.NODE_ENV === 'development' && window.location.pathname === '/dev/3d') {
-    return (
-      <React.Suspense fallback={null}>
-        <ModelDebugger />
-      </React.Suspense>
-    );
-  }
+  useEffect(() => {
+    // Check hostname for production domain
+    const isSafeComputeDomain = window.location.hostname.includes('safecompute.tech');
 
-  return (
-    <div className="min-h-screen text-white font-sans selection:bg-primary/30 relative">
-      <Background3D />
-      <Header />
-      <main className="relative z-10">
-        <Hero />
-        <About />
-        <Infrastructure />
-        <Pricing />
-        <Videos />
-        <FAQ />
-        <Resources />
-        <CallToAction />
-      </main>
-      <footer className="py-10 text-center text-gray-500 text-sm border-t border-white/10 bg-black/80 backdrop-blur-md">
-        <div className="container mx-auto px-4">
-          <p className="mb-2">{t.footer.rights}</p>
-          <p className="text-xs text-gray-600">{t.footer.payment}</p>
-        </div>
-      </footer>
-    </div>
-  );
+    // Check path for development/testing
+    const isSafeComputePath = window.location.pathname.startsWith('/safecompute');
+
+    if (isSafeComputeDomain || isSafeComputePath) {
+      setIsSafeCompute(true);
+
+      // If we are on the safecompute domain but using the /safecompute path, 
+      // we might want to clean up the URL, but for now let's just render the component.
+    }
+  }, []);
+
+  return isSafeCompute ? <SafeComputeLanding /> : <GonkaLanding />;
 }
 
 export default App;

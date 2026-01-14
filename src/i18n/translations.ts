@@ -6,6 +6,14 @@ export const translations = {
         pricing: "Тарифы",
         faq: "FAQ",
       },
+      safecompute_nav: {
+        about: "О сети",
+        problem: "Решение",
+        pricing: "Тарифы",
+        how_it_works: "Как это работает",
+        economics: "Экономика",
+        faq: "FAQ",
+      },
       cta: "Подключиться",
     },
     hero: {
@@ -175,13 +183,190 @@ export const translations = {
     footer: {
       rights: "© 2025 GONKA Mining. All rights reserved.",
       payment: "Оплата: Предоплата за 1 месяц. Реквизиты будут предоставлены.",
+    },
+    safecompute: {
+      hero: {
+        tag: "Сеть GONKA Mainnet уже запущена",
+        title: "Майните GNK от 200$",
+        title_accent: "под ключ",
+        description: "Станьте частью революции децентрализованного ИИ. Мы берем на себя настройку оборудования и серверов - вы получаете добытые токены GNK.",
+        cta: "Начать майнинг",
+        features: {
+          ready: "Топовые GPU",
+          ready_desc: "H100/A100 Майнинг",
+          passive: "Под ключ",
+          passive_desc: "Тех. обслуживание",
+          warranty: "Поддержка",
+          warranty_desc: "24 часа",
+        },
+      },
+      about_custom: {
+        title: "Что такое",
+        title_accent: "Gonka Network?",
+        description: "Gonka — это децентрализованная сеть для вычислений искусственного интеллекта (AI Compute). В отличие от обычных криптовалют, здесь майнинг обеспечивает реальную пользу: обучение нейросетей и инференс (работу ИИ).",
+        facts: [
+          {
+            title: "Инвестиции гигантов",
+            desc: "В проект инвестировал Bitfury (легенда майнинга биткоина) — более $50 млн, а также фонды, поддерживавшие OpenAI и Solana."
+          },
+          {
+            title: "Основатели",
+            desc: "Братья Либерманы (экс-директора Snapchat), создатели \"единорогов\"."
+          },
+          {
+            title: "Технология",
+            desc: "Proof-of-Work нового поколения. Мощность сети уже эквивалентна тысячам видеокарт H100."
+          },
+          {
+            title: "Дефицит",
+            desc: "Всего 1 млрд токенов, модель халвинга (уменьшения награды) как у Биткоина."
+          }
+        ]
+      },
+      problem_solution: {
+        title: "Проблема vs ",
+        title_accent: "Решение",
+        problem: {
+          title: "Самостоятельный майнинг",
+          items: [
+            "Требуются мощные GPU (H100, 4090) от $2000 до $30000.",
+            "Сложная настройка: Linux, Docker, управление ключами.",
+            "Риск простоя и штрафов (слэшинга).",
+          ]
+        },
+        solution: {
+          title: "Майнинг с нами (Под ключ)",
+          items: [
+            "Доступный вход: Старт всего от 200$. Объединяем капитал.",
+            "Никакой техники: Мы управляем нодами 24/7.",
+            "Гарантия работы: Профессиональное администрирование.",
+          ]
+        }
+      },
+      pricing: {
+        title: "Гибкие условия для инвесторов",
+        subtitle: "Чем выше депозит, тем выгоднее",
+        note: "Management Fee снижается с объемом",
+        plans: {
+          short: {
+            name: "Сompute basic",
+            price: "$200",
+            period: "вход",
+            features: ["Management Fee: 30%", "Идеально для теста", "Знакомство с проектом"],
+            cta: "Выбрать тариф",
+          },
+          medium: {
+            tag: "Рекомендуемый",
+            name: "Сompute +",
+            price: "$1 000",
+            period: "вход",
+            features: ["Management Fee: 20%", "Выгода 10%", "Оптимальный выбор"],
+            cta: "Выбрать тариф",
+          },
+          long: {
+            name: "Сompute Pro",
+            price: "$10 000",
+            period: "вход",
+            features: ["Management Fee: 17%", "Максимальная доходность", "Персональная поддержка"],
+            cta: "Выбрать тариф",
+          },
+        },
+      },
+      how_it_works: {
+        title: "Как это работает",
+        subtitle: "Техническая часть простыми словами",
+        steps: [
+          { title: "Пополнение", desc: "Вы вносите депозит (USDT/USDC TRC20)." },
+          { title: "Запуск мощностей", desc: "Мы аллоцируем средства на покупку/аренду долей GPU." },
+          { title: "Эпохи (Майнинг)", desc: "Оборудование выполняет задачи и получает вознаграждение." },
+          { title: "Распределение", desc: "Награда за вычетом Fee начисляется раз в месяц (180 дней вестинг)." }
+        ]
+      },
+      fomo: {
+        title: "Эра Биткоина для ИИ",
+        subtitle: "Только начинается",
+        text: "Сеть запущена в августе 2025. Сейчас 'Grace Period' — награды максимальны.",
+        grace_period: "Grace Period",
+        today: "Сегодня",
+        disclaimer: "* График является визуальной иллюстрацией изменения награды за майнинг во времени.",
+        chart: {
+          start: "Старт (2025)",
+          halving1: "Халвинг 1 (Авг 2029)",
+          halving2: "Халвинг 2 (Авг 2033)",
+          daily_reward_potential: "Потенциал дневной награды",
+          daily_reward: "Дневная Награда",
+          reward: "Награда",
+          month: "Месяц"
+        },
+        epochs: {
+          now: {
+            title: "Сейчас (2025–2029)",
+            text: "Сеть выделяет <span class=\"text-white font-mono\">~323,000 GNK</span> в сутки на всех майнеров."
+          },
+          halving1: {
+            title: "После 1-го Халвинга (Авг 2029)",
+            text: "Выделяться будет уже <span class=\"text-white font-mono\">~161,500 GNK</span> в сутки."
+          },
+          halving2: {
+            title: "После 2-го Халвинга (Авг 2033)",
+            text: "Всего <span class=\"text-white font-mono\">~80,750 GNK</span> в сутки."
+          }
+        }
+      },
+      faq: {
+        title: "FAQ",
+        subtitle: "Часто задаваемые вопросы",
+        items: [
+          {
+            q: "Какие гарантии вы предоставляете?",
+            a: "Мы предоставляем публичную ссылку на блокчейн для отслеживания баланса и начислений. Все прозрачно."
+          },
+          {
+            q: "Что такое Management Fee?",
+            a: "Комиссия за управление (администрирование, мониторинг, unjail, claim наград) поверх внесенной суммы."
+          },
+          {
+            q: "Можно ли вывести деньги после аллокации?",
+            a: "Нет, так как мощности арендуются под конкретный кейс. Возврат возможен только после окончания периода."
+          },
+          {
+            q: "Когда обновляется статус платежа?",
+            a: "В течение 1-2 часов после подтверждения. Если дольше — пишите в поддержку."
+          },
+          {
+            q: "Что такое вестинг?",
+            a: "Механизм постепенной разблокировки (1/180 в день) для стабильности экономики."
+          },
+          {
+            q: "Как вывести токены?",
+            a: "Привяжите кошелек в профиле и отправьте запрос. Вывод в течение 24 часов."
+          },
+          {
+            q: "Как создать кошелёк?",
+            a: "Рекомендуем Keplr Wallet с авторизацией через Google. Не теряйте доступы."
+          },
+          {
+            q: "Как подключиться к Dashboard?",
+            a: "Выберите любую ноду (например http://185.216.21.98:8000), нажмите Connect Wallet и выберите Keplr."
+          }
+        ]
+      }
     }
+
   },
   en: {
     header: {
       nav: {
         about: "About GONKA",
         pricing: "Pricing",
+        faq: "FAQ",
+      },
+      safecompute_nav: {
+        about: "About",
+        problem: "Solution",
+        pricing: "Pricing",
+        how_it_works: "How it works",
+        economics: "Economics",
         faq: "FAQ",
       },
       cta: "Connect",
@@ -353,6 +538,174 @@ export const translations = {
     footer: {
       rights: "© 2025 GONKA Mining. All rights reserved.",
       payment: "Payment: 1-month prepayment. Details will be provided.",
+    },
+    safecompute: {
+      hero: {
+        tag: "GONKA Mainnet is already live",
+        title: "Mine GNK from $200",
+        title_accent: "turnkey",
+        description: "Become part of the decentralized AI revolution. We handle hardware setup and servers — you get mined GNK tokens.",
+        cta: "Start Mining",
+        features: {
+          ready: "Top GPUs",
+          ready_desc: "H100/A100 Mining",
+          passive: "Turnkey",
+          passive_desc: "We handle tech",
+          warranty: "Support",
+          warranty_desc: "24/7 Assistance",
+        },
+      },
+      about_custom: {
+        title: "What is",
+        title_accent: "Gonka Network?",
+        description: "Gonka is a decentralized network for AI compute. Unlike standard cryptocurrencies, mining here provides real utility: training neural networks and inference.",
+        facts: [
+          {
+            title: "Giant Investments",
+            desc: "Bitfury (Bitcoin mining legend) invested over $50M, along with funds that supported OpenAI and Solana."
+          },
+          {
+            title: "Founders",
+            desc: "The Liberman brothers (ex-Snapchat directors), creators of \"unicorns\"."
+          },
+          {
+            title: "Technology",
+            desc: "Next-gen Proof-of-Work. Network power is already equivalent to thousands of H100 GPUs."
+          },
+          {
+            title: "Scarcity",
+            desc: "Total supply of 1 billion tokens, Bitcoin-like halving model (rewards decrease)."
+          }
+        ]
+      },
+      problem_solution: {
+        title: "The Problem vs ",
+        title_accent: "Our Solution",
+        problem: {
+          title: "Mining Yourself",
+          items: [
+            "Requires powerful GPUs (H100, 4090) costing $2,000 - $30,000.",
+            "Complex setup: Linux, Docker, key management.",
+            "Risk of downtime and slashing penalties.",
+          ]
+        },
+        solution: {
+          title: "Mining with Us (Turnkey)",
+          items: [
+            "Affordable entry: Start from just $200. We pool capital for power.",
+            "No tech needed: We manage nodes, update software, and monitor 24/7.",
+            "Guaranteed uptime: Professional administration.",
+          ]
+        }
+      },
+      pricing: {
+        title: "Flexible Terms for Investors",
+        subtitle: "The higher the deposit, the better the terms",
+        note: "Management Fee decreases with volume",
+        plans: {
+          short: {
+            name: "Compute Basic",
+            price: "$200",
+            period: "min entry",
+            features: ["Management Fee: 30%", "Ideal for hypothesis testing", "Intro to project"],
+            cta: "Select Plan",
+          },
+          medium: {
+            tag: "RECOMMENDED",
+            name: "Compute +",
+            price: "$1,000",
+            period: "min entry",
+            features: ["Management Fee: 20%", "10% lower fee than Basic", "Optimal value"],
+            cta: "Select Plan",
+          },
+          long: {
+            name: "Compute Pro",
+            price: "$10,000",
+            period: "min entry",
+            features: ["Management Fee: 17%", "Maximum Yield", "Personal Support"],
+            cta: "Select Plan",
+          },
+        },
+      },
+      how_it_works: {
+        title: "How it Works",
+        subtitle: "Technical part in simple words",
+        steps: [
+          { title: "Deposit", desc: "You deposit USDT/USDC (TRC20)." },
+          { title: "Launch", desc: "We allocate funds to buy/rent GPU shares in clusters." },
+          { title: "Epochs", desc: "Hardware performs inference tasks and earns rewards." },
+          { title: "Distribution", desc: "Rewards minus fee are credited to your wallet monthly (180 days vesting)." }
+        ]
+      },
+      fomo: {
+        title: "Bitcoin for AI Era",
+        subtitle: "Only Just Beginning",
+        text: "Network launched in August 2025. We are in the early 'Grace Period' where rewards are maximal.",
+        grace_period: "Grace Period",
+        today: "Today",
+        disclaimer: "* The graph is a visual illustration of the change in individual mining rewards over time.",
+        chart: {
+          start: "Start (2025)",
+          halving1: "Halving 1 (Aug 2029)",
+          halving2: "Halving 2 (Aug 2033)",
+          daily_reward_potential: "Daily Reward Potential",
+          daily_reward: "Daily Reward",
+          reward: "Reward",
+          month: "Month"
+        },
+        epochs: {
+          now: {
+            title: "Now (2025–2029)",
+            text: "Network allocates <span class=\"text-white font-mono\">~323,000 GNK</span> per day to all miners."
+          },
+          halving1: {
+            title: "After 1st Halving (Aug 2029)",
+            text: "Allocation drops to <span class=\"text-white font-mono\">~161,500 GNK</span> per day."
+          },
+          halving2: {
+            title: "After 2nd Halving (Aug 2033)",
+            text: "Allocation drops to <span class=\"text-white font-mono\">~80,750 GNK</span> per day."
+          }
+        }
+      },
+      faq: {
+        title: "FAQ",
+        subtitle: "Frequently Asked Questions",
+        items: [
+          {
+            q: "What guarantees do you provide?",
+            a: "We provide a public blockchain link where you can track balance and accrued GNK at any time. All operations are transparent."
+          },
+          {
+            q: "What is Management Fee?",
+            a: "It's a commission for infrastructure management (admin, monitoring, unjail, claiming rewards, support) deducted from the top."
+          },
+          {
+            q: "Can I withdraw funds after allocation?",
+            a: "No. Once allocated to compute power, refunds are not possible until the mining period ends as hardware is rented for specific cases."
+          },
+          {
+            q: "When is payment status updated?",
+            a: "Automatically within 1-2 hours after blockchain confirmation. If longer, contact Telegram support."
+          },
+          {
+            q: "What is vesting?",
+            a: "Gradual unlocking of earned tokens (1/180 daily) to ensure economic stability and prevent dumping."
+          },
+          {
+            q: "How to withdraw tokens?",
+            a: "Link your GNK wallet in profile, request withdrawal, and receive tokens within 24 hours."
+          },
+          {
+            q: "How to create a Gonka Network wallet?",
+            a: "We recommend Keplr Wallet with Google auth. Never share your private key."
+          },
+          {
+            q: "How to connect to decentralized Dashboard?",
+            a: "Choose any node (e.g., http://185.216.21.98:8000), click 'Connect Wallet', and select Keplr."
+          }
+        ]
+      }
     }
   },
 };

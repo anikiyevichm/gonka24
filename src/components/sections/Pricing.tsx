@@ -4,9 +4,24 @@ import { motion } from "framer-motion";
 import { useTally } from "../../hooks/useTally";
 import { useLanguage } from "../../contexts/LanguageContext";
 
-export const Pricing = () => {
+interface PricingProps {
+  content?: {
+    title: string;
+    subtitle: string;
+    note: string;
+    plans: {
+      short: any;
+      medium: any;
+      long: any;
+    };
+  };
+}
+
+export const Pricing = ({ content }: PricingProps) => {
   const { openTally } = useTally();
   const { t } = useLanguage();
+  const c = content || t.pricing;
+
 
   return (
     <section id="pricing" className="py-20 relative">
@@ -14,13 +29,13 @@ export const Pricing = () => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-            {t.pricing.title}
+            {c.title}
           </h2>
           <p className="text-xl md:text-2xl text-primary font-medium mb-6">
-            {t.pricing.subtitle}
+            {c.subtitle}
           </p>
           <p className="text-gray-400 text-lg">
-            <span className="font-bold text-white">{t.pricing.note}</span>
+            <span className="font-bold text-white">{c.note}</span>
           </p>
         </div>
 
@@ -30,14 +45,14 @@ export const Pricing = () => {
             whileHover={{ y: -10 }}
             className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl relative flex flex-col"
           >
-            <h3 className="text-xl font-medium text-gray-300 mb-2">{t.pricing.plans.short.name}</h3>
+            <h3 className="text-xl font-medium text-gray-300 mb-2">{c.plans.short.name}</h3>
             <div className="flex items-end gap-2 mb-6">
-              <span className="text-4xl font-bold text-white">{t.pricing.plans.short.price}</span>
-              <span className="text-sm text-gray-400 mb-2">{t.pricing.plans.short.period}</span>
+              <span className="text-4xl font-bold text-white">{c.plans.short.price}</span>
+              <span className="text-sm text-gray-400 mb-2">{c.plans.short.period}</span>
             </div>
 
             <div className="space-y-4 mb-8 flex-grow">
-              {t.pricing.plans.short.features.map((feature, i) => (
+              {c.plans.short.features.map((feature: string, i: number) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="p-1 rounded bg-primary/20">
                     <Check className="w-4 h-4 text-primary" />
@@ -51,7 +66,7 @@ export const Pricing = () => {
               onClick={() => openTally({ hiddenFields: { plan: '1_month' } })}
               className="w-full py-4 bg-white/10 text-white font-bold rounded-lg hover:bg-white/20 transition-colors border border-white/10"
             >
-              {t.pricing.plans.short.cta}
+              {c.plans.short.cta}
             </button>
           </motion.div>
 
@@ -61,16 +76,16 @@ export const Pricing = () => {
             className="p-8 rounded-2xl bg-gradient-to-b from-primary/20 to-black border border-primary/50 backdrop-blur-xl relative transform md:-translate-y-4 flex flex-col overflow-hidden"
           >
             <div className="absolute top-0 right-0 bg-primary text-black text-xs font-bold px-3 py-1 rounded-bl-lg">
-              {t.pricing.plans.medium.tag}
+              {c.plans.medium.tag || "POPULAR"}
             </div>
-            <h3 className="text-xl font-medium text-white mb-2">{t.pricing.plans.medium.name}</h3>
+            <h3 className="text-xl font-medium text-white mb-2">{c.plans.medium.name}</h3>
             <div className="flex items-end gap-2 mb-6">
-              <span className="text-5xl font-bold text-primary">{t.pricing.plans.medium.price}</span>
-              <span className="text-sm text-gray-400 mb-2">{t.pricing.plans.medium.period}</span>
+              <span className="text-5xl font-bold text-primary">{c.plans.medium.price}</span>
+              <span className="text-sm text-gray-400 mb-2">{c.plans.medium.period}</span>
             </div>
 
             <div className="space-y-4 mb-8 flex-grow">
-              {t.pricing.plans.medium.features.map((feature, i) => (
+              {c.plans.medium.features.map((feature: string, i: number) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="p-1 rounded bg-primary/20">
                     <Check className="w-4 h-4 text-primary" />
@@ -84,7 +99,7 @@ export const Pricing = () => {
               onClick={() => openTally({ hiddenFields: { plan: '2_months' } })}
               className="w-full py-4 bg-primary text-black font-bold rounded-lg hover:bg-primary/90 transition-colors shadow-[0_0_20px_rgba(34,197,94,0.3)]"
             >
-              {t.pricing.plans.medium.cta}
+              {c.plans.medium.cta}
             </button>
           </motion.div>
 
@@ -93,14 +108,14 @@ export const Pricing = () => {
             whileHover={{ y: -10 }}
             className="p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl relative flex flex-col"
           >
-            <h3 className="text-xl font-medium text-gray-300 mb-2">{t.pricing.plans.long.name}</h3>
+            <h3 className="text-xl font-medium text-gray-300 mb-2">{c.plans.long.name}</h3>
             <div className="flex items-end gap-2 mb-6">
-              <span className="text-4xl font-bold text-white">{t.pricing.plans.long.price}</span>
-              <span className="text-sm text-gray-400 mb-2">{t.pricing.plans.long.period}</span>
+              <span className="text-4xl font-bold text-white">{c.plans.long.price}</span>
+              <span className="text-sm text-gray-400 mb-2">{c.plans.long.period}</span>
             </div>
 
             <div className="space-y-4 mb-8 flex-grow">
-              {t.pricing.plans.long.features.map((feature, i) => (
+              {c.plans.long.features.map((feature: string, i: number) => (
                 <div key={i} className="flex items-center gap-3">
                   <div className="p-1 rounded bg-primary/20">
                     <Check className="w-4 h-4 text-primary" />
@@ -114,7 +129,7 @@ export const Pricing = () => {
               onClick={() => openTally({ hiddenFields: { plan: '3_months' } })}
               className="w-full py-4 bg-white/10 text-white font-bold rounded-lg hover:bg-white/20 transition-colors border border-white/10"
             >
-              {t.pricing.plans.long.cta}
+              {c.plans.long.cta}
             </button>
           </motion.div>
         </div>
