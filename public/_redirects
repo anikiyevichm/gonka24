@@ -1,0 +1,3 @@
+# SafeCompute Domain Routing
+https://safecompute.tech/*  /safecompute/:splat  200!
+https://www.safecompute.tech/*  /safecompute/:splat  200!
