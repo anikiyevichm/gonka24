@@ -63,7 +63,7 @@ export function CalculatorPage() {
     if (amount < config.min) {
       const msg = calcT.input.error.min
         .replace('{name}', poolName)
-        .replace('${min}', `$${config.min.toLocaleString()}`);
+        .replace('{min}', `$${config.min.toLocaleString()}`);
       return {
         dailyGNK: '0.00',
         monthlyGNK: '0.00',
@@ -74,7 +74,7 @@ export function CalculatorPage() {
     if (config.max !== Infinity && amount > config.max) {
       const msg = calcT.input.error.max
         .replace('{name}', poolName)
-        .replace('${max}', `$${config.max.toLocaleString()}`);
+        .replace('{max}', `$${config.max.toLocaleString()}`);
       return {
         dailyGNK: '0.00',
         monthlyGNK: '0.00',

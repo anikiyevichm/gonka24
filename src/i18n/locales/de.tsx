@@ -569,8 +569,8 @@ export const de = {
       label: "Monatlicher Investitionsbetrag ($)",
       placeholder: "Betrag eingeben",
       error: {
-        min: "Der Mindestbetrag für {name} beträgt ${min}",
-        max: "Der Höchstbetrag für {name} beträgt ${max}"
+        min: "Der Mindestbetrag für {name} beträgt {min}",
+        max: "Der Höchstbetrag für {name} beträgt {max}"
       }
     },
     results: {

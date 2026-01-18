@@ -581,8 +581,8 @@ export const en = {
       label: "Monthly investment amount ($)",
       placeholder: "Enter amount",
       error: {
-        min: "Minimum amount for {name} is ${min}",
-        max: "Maximum amount for {name} is ${max}"
+        min: "Minimum amount for {name} is {min}",
+        max: "Maximum amount for {name} is {max}"
       }
     },
     results: {

@@ -10,7 +10,7 @@ export const SafeComputeFAQ = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const { language, t } = useLanguage();
+  const { t } = useLanguage();
 
   const items = t.safecompute.faq.items;
 

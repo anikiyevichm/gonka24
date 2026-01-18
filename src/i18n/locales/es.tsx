@@ -569,8 +569,8 @@ export const es = {
       label: "Monto de inversión mensual ($)",
       placeholder: "Ingrese el monto",
       error: {
-        min: "El monto mínimo para {name} es ${min}",
-        max: "El monto máximo para {name} es ${max}"
+        min: "El monto mínimo para {name} es {min}",
+        max: "El monto máximo para {name} es {max}"
       }
     },
     results: {

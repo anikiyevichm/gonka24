@@ -569,8 +569,8 @@ export const ar = {
       label: "مبلغ الاستثمار الشهري ($)",
       placeholder: "أدخل المبلغ",
       error: {
-        min: "الحد الأدنى للمبلغ لـ {name} هو ${min}",
-        max: "الحد الأقصى للمبلغ لـ {name} هو ${max}"
+        min: "الحد الأدنى للمبلغ لـ {name} هو {min}",
+        max: "الحد الأقصى للمبلغ لـ {name} هو {max}"
       }
     },
     results: {

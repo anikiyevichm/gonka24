@@ -569,8 +569,8 @@ export const zh = {
       label: "每月投资金额 ($)",
       placeholder: "输入金额",
       error: {
-        min: "{name} 的最低金额为 ${min}",
-        max: "{name} 的最高金额为 ${max}"
+        min: "{name} 的最低金额为 {min}",
+        max: "{name} 的最高金额为 {max}"
       }
     },
     results: {
