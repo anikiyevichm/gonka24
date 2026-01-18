@@ -9,6 +9,10 @@ import { Pricing } from '../components/sections/Pricing';
 import { Process } from '../components/sections/Process';
 import { Fomo } from '../components/sections/Fomo';
 import { SafeComputeFAQ } from '../components/sections/SafeComputeFAQ';
+import { TokenomicsSection } from '../components/sections/TokenomicsSection';
+import { FinalCTA } from '../components/sections/FinalCTA';
+
+import { ContactModalProvider } from '../contexts/ContactModalContext';
 
 export function SafeComputeLanding() {
   const { t } = useLanguage();
@@ -28,25 +32,49 @@ export function SafeComputeLanding() {
   ];
 
   return (
-    <div className="min-h-screen text-white font-sans selection:bg-primary/30 relative">
-      <Background3D />
-      <Header customLinks={navLinks} />
-      <main className="relative z-10">
-        <Hero content={content?.hero} />
-        <AboutSafeCompute content={content?.about_custom} />
-        <ProblemSolution content={content?.problem_solution} />
+    <ContactModalProvider>
+      <div className="min-h-screen font-sans selection:bg-primary/30 relative text-foreground">
+        <Background3D />
+        <Header customLinks={navLinks} />
+        <main className="relative z-10">
+          <Hero content={content?.hero} />
+          <AboutSafeCompute content={content?.about_custom} />
+          <ProblemSolution content={content?.problem_solution} />
 
-        <Pricing content={content?.pricing} />
-        <Process content={content?.how_it_works} />
-        <Fomo content={content?.fomo} />
-        <SafeComputeFAQ />
-      </main>
-      <footer className="py-10 text-center text-gray-500 text-sm border-t border-white/10 bg-black/80 backdrop-blur-md">
-        <div className="container mx-auto px-4">
-          <p className="mb-2">{t.footer.rights}</p>
-          <p className="text-xs text-gray-600">{t.footer.payment}</p>
-        </div>
-      </footer>
-    </div>
+          <Pricing content={content?.pricing} />
+          <Process content={content?.how_it_works} />
+          <Fomo content={content?.fomo} />
+          <TokenomicsSection content={content?.tokenomics_section} />
+          <SafeComputeFAQ />
+          <FinalCTA content={content?.final_cta} />
+        </main>
+        <footer className="py-8 text-center text-muted-foreground text-sm border-t border-border bg-card/80 backdrop-blur-md">
+          <div className="container mx-auto px-4 flex flex-col items-center gap-4">
+            <div className="space-y-1">
+              <p className="text-muted-foreground/60 font-medium">{t.footer.rights}</p>
+              <p className="text-xs text-muted-foreground/50">{t.footer.payment}</p>
+            </div>
+
+            <div className="flex flex-col gap-1 text-xs">
+              <div className="flex flex-col sm:flex-row gap-1 sm:gap-4 items-center justify-center">
+                <p>
+                  {t.footer.contact_text}{' '}
+                  <a href={t.footer.manager_link} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition-all font-medium">
+                    {t.footer.contact_link_text}
+                  </a>
+                </p>
+                <span className="hidden sm:inline text-border">•</span>
+                <p>
+                  {t.footer.community_text}{' '}
+                  <a href={t.footer.community_link} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition-all font-medium">
+                    {t.footer.community_link_text}
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </ContactModalProvider>
   );
 }

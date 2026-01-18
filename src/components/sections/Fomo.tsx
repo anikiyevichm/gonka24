@@ -166,25 +166,25 @@ export const Fomo = ({ content }: FomoProps) => {
       <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-transparent opacity-20" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-5xl mx-auto text-center bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 backdrop-blur-md">
+        <div className="max-w-5xl mx-auto text-center bg-card border border-border rounded-3xl p-8 md:p-12 backdrop-blur-md shadow-lg">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 text-primary font-bold mb-6">
             <TrendingUp className="w-5 h-5" />
             <span>{c.grace_period || "Grace Period"}</span>
           </div>
 
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-2">
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-2">
             {c.title}
           </h2>
-          <p className="text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-primary to-white font-bold mb-8">
+          <p className="text-2xl md:text-3xl font-bold mb-8 text-primary">
             {c.subtitle}
           </p>
 
-          <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-10">
+          <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-10">
             {c.text}
           </p>
 
           {/* Recharts Visualization */}
-          <div className="h-64 md:h-80 w-full mt-12 bg-black/20 rounded-xl border border-white/5 p-4 relative">
+          <div className="h-64 md:h-80 w-full mt-12 bg-muted/30 rounded-xl border border-border p-4 relative">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 data={data}
@@ -198,7 +198,7 @@ export const Fomo = ({ content }: FomoProps) => {
                 </defs>
                 <CartesianGrid
                   strokeDasharray="3 3"
-                  stroke="rgba(255,255,255,0.05)"
+                  stroke="rgba(0,0,0,0.05)"
                   vertical={false}
                 />
                 <XAxis
@@ -215,8 +215,8 @@ export const Fomo = ({ content }: FomoProps) => {
                           ? c.chart?.halving2 || "Halving 2"
                           : ""
                   }
-                  stroke="rgba(255,255,255,0.3)"
-                  tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 12 }}
+                  stroke="rgba(0,0,0,0.3)"
+                  tick={{ fill: "rgba(0,0,0,0.5)", fontSize: 12 }}
                   tickLine={false}
                   axisLine={{ stroke: "rgba(255,255,255,0.1)" }}
                 />
@@ -229,16 +229,17 @@ export const Fomo = ({ content }: FomoProps) => {
                     value: c.chart?.daily_reward_potential || "Daily Reward Potential",
                     angle: -90,
                     position: "insideLeft",
-                    fill: "rgba(255,255,255,0.4)",
+                    fill: "rgba(0,0,0,0.4)",
                     fontSize: 12,
                     dy: 60,
                   }}
                 />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "rgba(0,0,0,0.8)",
-                    border: "1px solid rgba(255,255,255,0.1)",
+                    backgroundColor: "rgba(255,255,255,0.95)",
+                    border: "1px solid rgba(0,0,0,0.1)",
                     borderRadius: "8px",
+                    color: "#000"
                   }}
                   itemStyle={{ color: "#39ff14" }}
                   formatter={(value: number | undefined) => [
@@ -280,12 +281,12 @@ export const Fomo = ({ content }: FomoProps) => {
             </ResponsiveContainer>
           </div>
 
-          <div className="mt-6 text-left max-w-3xl mx-auto space-y-4 text-sm text-gray-400">
-            <p className="italic text-center text-gray-500 mb-4">
+          <div className="mt-6 text-left max-w-3xl mx-auto space-y-4 text-sm text-muted-foreground">
+            <p className="italic text-center text-muted-foreground/80 mb-4">
               {c.disclaimer}
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-white/10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-border">
               <div>
                 <h4 className="text-[#39ff14] font-bold mb-1">
                   {c.epochs?.now?.title}

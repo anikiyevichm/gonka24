@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 import { translations, Language, Translation } from "../i18n/translations";
 
 interface LanguageContextType {
@@ -10,14 +10,33 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguageState] = useState<Language>('ru');
-
-  useEffect(() => {
+  const [language, setLanguageState] = useState<Language>(() => {
+    // 1. Check localStorage first
     const savedLang = localStorage.getItem('language') as Language;
-    if (savedLang && (savedLang === 'ru' || savedLang === 'en')) {
-      setLanguageState(savedLang);
+    if (savedLang === 'ru' || savedLang === 'en' || savedLang === 'es' || savedLang === 'de' || savedLang === 'zh') {
+      return savedLang;
     }
-  }, []);
+
+    // 2. Check browser language
+    if (typeof navigator !== 'undefined' && navigator.language) {
+      const lowerLang = navigator.language.toLowerCase();
+      if (lowerLang.startsWith('ru')) {
+        return 'ru';
+      }
+      if (lowerLang.startsWith('es')) {
+        return 'es';
+      }
+      if (lowerLang.startsWith('de')) {
+        return 'de';
+      }
+      if (lowerLang.startsWith('zh')) {
+        return 'zh';
+      }
+    }
+
+    // 3. Default to English
+    return 'en';
+  });
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);

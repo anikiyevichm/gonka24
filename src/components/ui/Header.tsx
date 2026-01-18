@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Cpu } from "lucide-react";
+import { Menu, X, Shield, ChevronDown } from "lucide-react";
 import { cn } from "../../lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTally } from "../../hooks/useTally";
+import { useContactModal } from "../../contexts/ContactModalContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 interface HeaderProps {
@@ -12,7 +12,7 @@ interface HeaderProps {
 export const Header = ({ customLinks }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { openTally } = useTally();
+  const { openContactModal } = useContactModal();
   const { t, language, setLanguage } = useLanguage();
 
   useEffect(() => {
@@ -31,35 +31,102 @@ export const Header = ({ customLinks }: HeaderProps) => {
 
   const navLinks = customLinks || defaultNavLinks;
 
-  const LanguageSwitcher = ({ mobile = false }: { mobile?: boolean }) => (
-    <div className={cn("flex items-center gap-2 text-sm font-medium", mobile ? "justify-center mt-4" : "")}>
-      <button
-        onClick={() => setLanguage('ru')}
-        className={cn("transition-colors", language === 'ru' ? 'text-primary font-bold' : 'text-gray-500 hover:text-white')}
-      >
-        RU
-      </button>
-      <span className="text-gray-700">/</span>
-      <button
-        onClick={() => setLanguage('en')}
-        className={cn("transition-colors", language === 'en' ? 'text-primary font-bold' : 'text-gray-500 hover:text-white')}
-      >
-        EN
-      </button>
-    </div>
-  );
+  const LanguageSwitcher = ({ mobile = false }: { mobile?: boolean }) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+      if (mobile) return;
+      const handleClickOutside = (event: MouseEvent) => {
+        const target = event.target as HTMLElement;
+        if (!target.closest('.language-dropdown')) {
+          setIsOpen(false);
+        }
+      };
+      document.addEventListener('click', handleClickOutside);
+      return () => document.removeEventListener('click', handleClickOutside);
+    }, [mobile]);
+
+    const languages = [
+      { code: 'ru', label: 'RU' },
+      { code: 'en', label: 'EN' },
+      { code: 'es', label: 'ES' },
+      { code: 'de', label: 'DE' },
+      { code: 'zh', label: 'CN' },
+    ] as const;
+
+    const currentLang = languages.find(l => l.code === language) || languages[0];
+
+    if (mobile) {
+      return (
+        <div className="flex items-center justify-center gap-4 mt-4">
+          {languages.map((lang) => (
+            <button
+              key={lang.code}
+              onClick={() => setLanguage(lang.code)}
+              className={cn(
+                "text-sm font-medium transition-colors",
+                language === lang.code ? "text-primary font-bold" : "text-muted-foreground"
+              )}
+            >
+              {lang.label}
+            </button>
+          ))}
+        </div>
+      );
+    }
+
+    return (
+      <div className="relative language-dropdown">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {currentLang.label}
+          <ChevronDown className={cn("w-4 h-4 transition-transform", isOpen ? "rotate-180" : "")} />
+        </button>
+
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="absolute top-full right-0 mt-2 bg-card border border-border rounded-md shadow-lg overflow-hidden min-w-[80px] py-1"
+            >
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => {
+                    setLanguage(lang.code);
+                    setIsOpen(false);
+                  }}
+                  className={cn(
+                    "w-full text-left px-4 py-2 text-sm hover:bg-muted transition-colors",
+                    language === lang.code ? "text-primary font-bold" : "text-muted-foreground"
+                  )}
+                >
+                  {lang.label}
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  };
 
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent",
-        isScrolled ? "bg-black/80 backdrop-blur-md border-white/10 py-4" : "bg-transparent py-6"
+        isScrolled ? "bg-card/80 backdrop-blur-md border-border py-4 shadow-sm" : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-2 text-primary font-mono font-bold text-xl tracking-tighter cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
-          <Cpu className="w-8 h-8" />
-          <span>GONKA<span className="text-white">24</span></span>
+          <Shield className="w-8 h-8" />
+          <span>Safe<span className="text-foreground">Compute</span></span>
         </div>
 
         {/* Desktop Nav */}
@@ -68,14 +135,14 @@ export const Header = ({ customLinks }: HeaderProps) => {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-gray-300 hover:text-primary transition-colors hover:glow"
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors hover:glow"
             >
               {link.name}
             </a>
           ))}
           <LanguageSwitcher />
           <button
-            onClick={() => openTally()}
+            onClick={openContactModal}
             className="bg-primary text-black px-5 py-2 rounded font-bold hover:bg-primary/90 transition-transform active:scale-95"
           >
             {t.header.cta}
@@ -84,7 +151,7 @@ export const Header = ({ customLinks }: HeaderProps) => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-foreground"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
@@ -98,7 +165,7 @@ export const Header = ({ customLinks }: HeaderProps) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-black/95 border-b border-white/10 overflow-hidden"
+            className="md:hidden bg-card border-b border-border overflow-hidden"
           >
             <nav className="flex flex-col p-4 gap-4">
               {navLinks.map((link) => (
@@ -106,7 +173,7 @@ export const Header = ({ customLinks }: HeaderProps) => {
                   key={link.name}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-lg font-medium text-gray-300 hover:text-primary text-center"
+                  className="text-lg font-medium text-muted-foreground hover:text-primary text-center"
                 >
                   {link.name}
                 </a>
@@ -114,7 +181,7 @@ export const Header = ({ customLinks }: HeaderProps) => {
               <LanguageSwitcher mobile />
               <button
                 onClick={() => {
-                  openTally();
+                  openContactModal();
                   setIsMobileMenuOpen(false);
                 }}
                 className="bg-primary text-black px-5 py-3 rounded font-bold w-full"

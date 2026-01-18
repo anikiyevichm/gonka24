@@ -1,10 +1,10 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import { useTally } from "../../hooks/useTally";
+import { useContactModal } from "../../contexts/ContactModalContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 export const CallToAction = () => {
-  const { openTally } = useTally();
+  const { openContactModal } = useContactModal();
   const { t } = useLanguage();
 
   return (
@@ -49,7 +49,7 @@ export const CallToAction = () => {
           </p>
 
           <button
-            onClick={() => openTally()}
+            onClick={() => openContactModal()}
             className="px-10 py-5 bg-primary text-black font-bold text-xl rounded-lg hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_30px_rgba(34,197,94,0.5)] active:scale-95 flex items-center gap-3 mx-auto"
           >
             {t.cta_section.button}

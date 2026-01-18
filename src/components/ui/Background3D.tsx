@@ -240,7 +240,7 @@ export const Background3D = ({ overrides }: Background3DProps) => {
     // 1. Convert to fixed top-0 left-0 w-full (remove inset-0)
     // 2. Use 100lvh to ensure container height ignores mobile browser UI
     <div
-      className="fixed top-0 left-0 w-full z-[-1] bg-black"
+      className="fixed top-0 left-0 w-full z-0 bg-background"
       style={{ height: '100lvh' }}
     >
       <Canvas
@@ -271,8 +271,8 @@ export const Background3D = ({ overrides }: Background3DProps) => {
         </Suspense>
       </Canvas>
 
-      {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-[3px] pointer-events-none" />
+      {/* Overlay for text readability */}
+      <div className="absolute inset-0 bg-background/30 backdrop-blur-[8px] pointer-events-none" />
     </div>
   );
 };
