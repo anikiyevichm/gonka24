@@ -54,6 +54,7 @@ export const Header = ({ customLinks }: HeaderProps) => {
       { code: 'es', label: 'ES' },
       { code: 'de', label: 'DE' },
       { code: 'zh', label: 'CN' },
+      { code: 'ar', label: 'AR' },
     ] as const;
 
     const currentLang = languages.find(l => l.code === language) || languages[0];
