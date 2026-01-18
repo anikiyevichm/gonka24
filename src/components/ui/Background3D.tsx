@@ -258,14 +258,14 @@ export const Background3D = ({ overrides }: Background3DProps) => {
           <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
           <pointLight position={[-10, -10, -10]} intensity={1} />
 
-          <EntranceAnimation config={overrides?.entrance} animationKey={overrides?.animationKey}>
+          {/* <EntranceAnimation config={overrides?.entrance} animationKey={overrides?.animationKey}>
             <Model
               path={MODEL_PATH}
               rotation={overrides?.modelRotation}
               scale={overrides?.modelScale}
               disableFloat={overrides?.disableFloat}
             />
-          </EntranceAnimation>
+          </EntranceAnimation> */}
           <Environment preset="city" />
           <CameraRig radius={overrides?.cameraRadius} />
         </Suspense>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Shield, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { SafeComputeIcon } from "./SafeComputeIcon";
 import { cn } from "../../lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useContactModal } from "../../contexts/ContactModalContext";
@@ -125,7 +126,7 @@ export const Header = ({ customLinks }: HeaderProps) => {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <div className="flex items-center gap-2 text-primary font-mono font-bold text-xl tracking-tighter cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
-          <Shield className="w-8 h-8" />
+          <SafeComputeIcon className="w-8 h-8 md:w-10 md:h-10 text-primary" />
           <span>Safe<span className="text-foreground">Compute</span></span>
         </div>
 
