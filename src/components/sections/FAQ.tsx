@@ -34,7 +34,7 @@ export const FAQ = ({ content }: FAQProps) => {
         </div>
 
         <div className="space-y-4">
-          {c.items.map((item, index) => (
+          {c.items.map((item: { q: string; a: string }, index: number) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 10 }}

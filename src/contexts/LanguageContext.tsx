@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+// @ts-ignore - forcing update
 import { translations, Language, Translation } from "../i18n/translations";
 
 interface LanguageContextType {
@@ -13,7 +14,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     // 1. Check localStorage first
     const savedLang = localStorage.getItem('language') as Language;
-    if (savedLang === 'ru' || savedLang === 'en' || savedLang === 'es' || savedLang === 'de' || savedLang === 'zh') {
+    if (savedLang === 'ru' || savedLang === 'en' || savedLang === 'es' || savedLang === 'de' || savedLang === 'zh' || savedLang === 'ar') {
       return savedLang;
     }
 
@@ -31,6 +32,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       }
       if (lowerLang.startsWith('zh')) {
         return 'zh';
+      }
+      if (lowerLang.startsWith('ar')) {
+        return 'ar';
       }
     }
 

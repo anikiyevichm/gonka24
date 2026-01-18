@@ -18,7 +18,7 @@ export const CallToAction = () => {
           <div className="bg-white/5 rounded-2xl p-8 md:p-12 border border-white/10 backdrop-blur-sm mb-20">
             <h3 className="text-2xl font-bold text-white mb-8 text-center">{t.cta_section.how_it_works.title}</h3>
             <div className="grid md:grid-cols-3 gap-8 text-left">
-              {t.cta_section.how_it_works.steps.map((step, i) => (
+              {t.cta_section.how_it_works.steps.map((step: { title: string; desc: string }, i: number) => (
                 <div key={i} className="flex flex-col items-center text-center gap-4 relative">
                   <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl border border-primary/20 relative z-10">
                     {i + 1}

@@ -65,7 +65,7 @@ export const About = ({ content }: AboutProps) => {
                 <Globe className="w-5 h-5 text-primary" /> {c.why.title}
               </h3>
               <ul className="space-y-4 text-gray-300">
-                {c.why.list.map((item, index) => (
+                {c.why.list.map((item: string, index: number) => (
                   <li key={index} className="flex items-start gap-2">
                     <span className="text-primary font-bold">{index + 1}.</span>
                     <span>{item}</span>

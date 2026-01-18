@@ -1,3 +1,6 @@
+import React from "react";
+import { AlertTriangle, CheckCircle, ExternalLink } from "lucide-react";
+
 export const es = {
   header: {
     nav: {
@@ -335,35 +338,198 @@ export const es = {
       items: [
         {
           q: "¿Qué garantías ofrecen?",
-          a: "Proporcionamos un enlace público de blockchain donde puede rastrear el saldo y los GNK acumulados en cualquier momento. Todas las operaciones son transparentes."
+          a: (
+            <div className="space-y-3">
+              <p>Proporcionamos un enlace público de blockchain donde puede rastrear en cualquier momento:</p>
+              <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                <li>el saldo,</li>
+                <li>los GNK acumulados,</li>
+              </ul>
+              <p>Todas las operaciones son transparentes y verificables en la blockchain.</p>
+            </div>
+          )
         },
         {
           q: "¿Qué es el Management Fee?",
-          a: "Es una comisión por la gestión de infraestructura (administración, monitoreo, unjail, reclamo de recompensas, soporte) deducida del total."
+          a: (
+            <div className="space-y-3">
+              <p>Management Fee es una comisión por la gestión de infraestructura que deducimos además del monto que depositó.</p>
+              <p>La comisión incluye:</p>
+              <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                <li>administración de nodos,</li>
+                <li>monitoreo de tiempo de actividad,</li>
+                <li>unjail de nodos,</li>
+                <li>reclamo de recompensas,</li>
+                <li>soporte técnico.</li>
+              </ul>
+            </div>
+          )
         },
         {
-          q: "¿Puedo retirar fondos después de la asignación?",
-          a: "No. Una vez asignados a la potencia de cómputo, los reembolsos no son posibles hasta que finalice el período de minería, ya que el hardware se alquila para casos específicos."
+          q: "¿Puedo retirar fondos después de la asignación a potencia de cómputo?",
+          a: (
+            <div className="space-y-3">
+              <p className="font-bold text-red-400">No.</p>
+              <p>Si los fondos ya están asignados a potencia de cómputo, los reembolsos no son posibles hasta que finalice el período de minería.</p>
+              <p>Esto se debe a que el hardware se alquila y se fija para un caso específico.</p>
+            </div>
+          )
         },
         {
           q: "¿Cuándo se actualiza el estado del pago?",
-          a: "Automáticamente dentro de 1-2 horas después de la confirmación de blockchain. Si tarda más, contacte al soporte en Telegram."
+          a: (
+            <div className="space-y-3">
+              <p>El estado del pago se actualiza automáticamente dentro de 1-2 horas después de la confirmación de la blockchain.</p>
+              <p>Si han pasado más de 2 horas y el estado no se ha actualizado, escriba a nuestro soporte en Telegram.</p>
+            </div>
+          )
         },
         {
-          q: "¿Qué es el vesting?",
-          a: "Desbloqueo gradual de tokens ganados (1/180 diarios) para garantizar la estabilidad económica y prevenir dumping."
+          q: "¿Qué es el vesting y por qué es necesario?",
+          a: (
+            <div className="space-y-3">
+              <p>El vesting es un mecanismo de desbloqueo gradual de tokens ganados, utilizado en Gonka Network para:</p>
+              <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                <li>estabilidad económica,</li>
+                <li>protección contra la especulación,</li>
+                <li>prevención de ventas masivas repentinas.</li>
+              </ul>
+            </div>
+          )
+        },
+        {
+          q: "¿Cómo funciona el vesting?",
+          a: (
+            <div className="space-y-3">
+              <p>Cada día se desbloquea 1/180 de la cantidad ganada el día anterior.</p>
+              <div className="bg-muted p-4 rounded-lg border border-border">
+                <p className="font-semibold mb-2 text-primary">Ejemplo:</p>
+                <ul className="space-y-2 text-sm">
+                  <li>Hoy el pool ganó <span className="text-foreground font-semibold">180 GNK</span></li>
+                  <li>Mañana se desbloquea <span className="text-foreground font-semibold">1 GNK</span></li>
+                  <li>Pasado mañana — otro <span className="text-foreground font-semibold">1 GNK</span></li>
+                </ul>
+                <p className="mt-3 text-sm italic opacity-80">
+                  Si mañana el pool gana 180 GNK nuevamente, entonces pasado mañana se desbloquearán 2 GNK
+                  (1 GNK por el primer día + 1 GNK por el segundo)
+                </p>
+              </div>
+            </div>
+          )
         },
         {
           q: "¿Cómo retirar tokens?",
-          a: "1. Envía una solicitud de retiro en nuestro Telegram. 2. Transferimos las monedas a su billetera especificada en la solicitud. 3. La transferencia se ejecuta dentro de las 24 horas posteriores a la recepción de la solicitud."
+          a: (
+            <div className="space-y-3">
+              <ol className="list-decimal pl-5 space-y-2 text-muted-foreground">
+                <li>Envía una solicitud de retiro en nuestro Telegram</li>
+                <li>Transferimos las monedas a su billetera especificada en la solicitud</li>
+                <li>La transferencia se ejecuta dentro de las 24 horas posteriores a la recepción de la solicitud</li>
+              </ol>
+            </div>
+          )
         },
         {
           q: "¿Cómo crear una billetera Gonka Network?",
-          a: "Recomendamos Keplr Wallet con autenticación de Google. Nunca comparta su clave privada."
+          a: (
+            <div className="space-y-4">
+              <p>Recomendamos usar <span className="text-foreground font-semibold">Keplr Wallet</span> con autorización de Google.</p>
+
+              <div className="bg-red-500/10 border border-red-500/20 p-4 rounded-lg">
+                <div className="flex items-center gap-2 mb-2 text-red-400">
+                  <AlertTriangle className="w-5 h-5" />
+                  <span className="font-bold">Importante:</span>
+                </div>
+                <ul className="space-y-1 text-sm text-red-600/80">
+                  <li>Nunca comparta su clave privada con terceros</li>
+                  <li>Guarde su clave privada en un lugar seguro</li>
+                  <li>Si pierde el acceso a Gmail — la recuperación solo es posible a través de la clave privada</li>
+                </ul>
+              </div>
+            </div>
+          )
         },
         {
-          q: "¿Cómo conectarse al Dashboard descentralizado?",
-          a: "Elija cualquier nodo (por ejemplo, http://185.216.21.98:8000), haga clic en 'Connect Wallet' y seleccione Keplr."
+          q: "Instrucciones paso a paso para crear una billetera Keplr",
+          a: (
+            <div className="space-y-4">
+              <ol className="list-decimal pl-5 space-y-2 text-muted-foreground">
+                <li>Vaya al sitio web oficial de Keplr y haga clic en "Get Keplr Wallet"</li>
+                <li>Elija la extensión para su navegador (Chrome, Firefox, Edge, Brave)</li>
+                <li>Instale la extensión</li>
+                <li>Haga clic en "Create a new wallet"</li>
+                <li>Seleccione "Connect with Google"</li>
+              </ol>
+
+              <div className="bg-yellow-500/10 border border-yellow-500/20 p-4 rounded-lg">
+                <div className="flex items-center gap-2 mb-2 text-yellow-400">
+                  <AlertTriangle className="w-5 h-5" />
+                  <span className="font-bold">Importante:</span>
+                </div>
+                <p className="text-sm text-yellow-700/80 mb-2">No elija la opción de frase mnemotécnica.</p>
+                <p className="text-sm text-yellow-700/80">
+                  Sin autorización de Google no podrá realizar transacciones a través del puente; la plataforma requiere autorización de Google.
+                </p>
+              </div>
+
+              <ul className="list-disc pl-5 space-y-1 text-muted-foreground">
+                <li>Termine la configuración de la billetera</li>
+                <li>Guarde su clave privada</li>
+                <li>Seleccione las redes Cosmos Hub y Gonka</li>
+              </ul>
+            </div>
+          )
+        },
+        {
+          q: "¿Cómo conectarse al Dashboard descentralizado de Gonka?",
+          a: (
+            <div className="space-y-4">
+              <p>Elija cualquier nodo de la lista (todos son equivalentes):</p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm font-mono text-primary">
+                {[
+                  "http://185.216.21.98:8000",
+                  "http://69.19.136.233:8000",
+                  "http://36.189.234.197:18026",
+                  "http://36.189.234.237:17241",
+                  "http://node1.gonka.ai:8000",
+                  "http://node2.gonka.ai:8000",
+                  "http://node3.gonka.ai:8000",
+                  "http://47.236.26.199:8000",
+                  "http://47.236.19.22:18000",
+                  "http://gonka.spv.re:8000"
+                ].map((url) => (
+                  <a
+                    key={url}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block p-2 rounded bg-muted/50 hover:bg-muted transition-colors flex items-center justify-between group"
+                  >
+                    <span className="truncate">{url}</span>
+                    <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </a>
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground italic">Consejo: puede elegir cualquiera, todos dan acceso a la red Gonka.</p>
+            </div>
+          )
+        },
+        {
+          q: "¿Cómo conectar la billetera al Dashboard?",
+          a: (
+            <div className="space-y-3">
+              <ol className="list-decimal pl-5 space-y-2 text-muted-foreground">
+                <li>Abra el Dashboard en la URL seleccionada</li>
+                <li>Haga clic en "Connect Wallet" (esquina superior derecha)</li>
+                <li>Seleccione Keplr</li>
+                <li>Confirme la adición de la red Gonka</li>
+                <li className="flex items-center gap-2 text-green-400">
+                  <CheckCircle className="w-4 h-4" /> Listo
+                </li>
+              </ol>
+              <p className="text-muted-foreground">Ahora puede copiar la dirección de su billetera: es su dirección GNK para recibir recompensas.</p>
+            </div>
+          )
         }
       ]
     },
@@ -373,6 +539,44 @@ export const es = {
       text: "Empiece a ganar monedas GNK sin configuraciones complejas.",
       button: "Empezar a minar"
     }
+  },
+  calculator: {
+    title: "Calculadora de Rendimiento GNK",
+    subtitle: "Seleccione un grupo e ingrese el monto de la inversión",
+    pools: {
+      light: {
+        name: "Compute Light",
+        badge: "Peso 300"
+      },
+      pro: {
+        name: "Compute Pro",
+        badge: "Peso 1500"
+      },
+      premium: {
+        name: "Compute Premium",
+        badge: "Peso ∞"
+      }
+    },
+    info: {
+      min_deposit: "Depósito mín.:",
+      max_deposit: "Depósito máx.:",
+      node_weight: "Peso del nodo:",
+      management_fee: "Tarifa de gestión:",
+      base_yield: "Rendimiento base (1 nodo):",
+      yield_per_day: "GNK/día"
+    },
+    input: {
+      label: "Monto de inversión mensual ($)",
+      placeholder: "Ingrese el monto",
+      error: {
+        min: "El monto mínimo para {name} es ${min}",
+        max: "El monto máximo para {name} es ${max}"
+      }
+    },
+    results: {
+      daily: "GNK por día",
+      monthly: "GNK por mes",
+      tooltip: "Estas son cifras aproximadas. Los valores difieren significativamente según los hosts de la red."
+    }
   }
-
 };
