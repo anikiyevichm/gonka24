@@ -30,14 +30,14 @@ export interface Background3DOverrides {
   animationKey?: number;
 }
 
-interface ModelProps {
+export interface ModelProps {
   path: string;
   rotation?: [number, number, number];
   scale?: number;
   disableFloat?: boolean;
 }
 
-function Model({ path, rotation, scale = 1, disableFloat = false }: ModelProps) {
+export function Model({ path, rotation, scale = 1, disableFloat = false }: ModelProps) {
   const { scene } = useGLTF(path);
 
   const content = (
@@ -59,7 +59,7 @@ function Model({ path, rotation, scale = 1, disableFloat = false }: ModelProps) 
   );
 }
 
-function EntranceAnimation({ children, config = {}, animationKey }: { children: React.ReactNode, config?: EntranceConfig, animationKey?: number }) {
+export function EntranceAnimation({ children, config = {}, animationKey }: { children: React.ReactNode, config?: EntranceConfig, animationKey?: number }) {
   const pivotGroup = useRef<THREE.Group>(null);
   const contentGroup = useRef<THREE.Group>(null);
   const { viewport } = useThree();
