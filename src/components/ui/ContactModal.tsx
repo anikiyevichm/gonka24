@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2 } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { useLanguage } from "../../contexts/LanguageContext";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -9,6 +10,7 @@ interface ContactModalProps {
 }
 
 export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     contact: "",
@@ -123,7 +125,15 @@ export const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
               <div className="mt-8 md:mt-0 flex-1 flex flex-col justify-center">
                 <h2 className="text-2xl font-bold mb-2 text-center">Get an Offer</h2>
                 <p className="text-muted-foreground text-center mb-8">
-                  Leave your contact details to receive an offer or write to us on Telegram
+                  Leave your contact details to receive an offer or write to us on{" "}
+                  <a
+                    href={t.footer?.community_link || "https://t.me/+40Xsw5RML45mOGEx"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline font-medium"
+                  >
+                    Telegram
+                  </a>
                 </p>
 
                 {status === "success" ? (

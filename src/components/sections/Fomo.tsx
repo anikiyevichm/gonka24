@@ -130,7 +130,7 @@ const PulsatingDot = (props: any) => {
   const { cx, cy } = props;
   return (
     <svg x={cx - 10} y={cy - 10} width={20} height={20} viewBox="0 0 20 20">
-      <circle cx="10" cy="10" r="10" fill="#39ff14" opacity="0.4">
+      <circle cx="10" cy="10" r="10" fill="#22c55e" opacity="0.4">
         <animate
           attributeName="r"
           from="5"
@@ -148,7 +148,7 @@ const PulsatingDot = (props: any) => {
           repeatCount="indefinite"
         />
       </circle>
-      <circle cx="10" cy="10" r="4" fill="#39ff14" />
+      <circle cx="10" cy="10" r="4" fill="#22c55e" />
     </svg>
   );
 };
@@ -192,8 +192,8 @@ export const Fomo = ({ content }: FomoProps) => {
               >
                 <defs>
                   <linearGradient id="colorReward" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#39ff14" stopOpacity={0.4} />
-                    <stop offset="95%" stopColor="#39ff14" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#22c55e" stopOpacity={0.4} />
+                    <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid
@@ -241,7 +241,7 @@ export const Fomo = ({ content }: FomoProps) => {
                     borderRadius: "8px",
                     color: "#000"
                   }}
-                  itemStyle={{ color: "#39ff14" }}
+                  itemStyle={{ color: "#22c55e" }}
                   formatter={(value: number | undefined) => [
                     `${(value || 0).toFixed(1)}%`,
                     c.chart?.daily_reward || "Daily Reward",
@@ -251,7 +251,7 @@ export const Fomo = ({ content }: FomoProps) => {
                 <Area
                   type="monotone"
                   dataKey="reward"
-                  stroke="#39ff14"
+                  stroke="#22c55e"
                   fillOpacity={1}
                   fill="url(#colorReward)"
                   strokeWidth={2}
@@ -271,10 +271,10 @@ export const Fomo = ({ content }: FomoProps) => {
                     value={c.today || "Today"}
                     position="top"
                     offset={10}
-                    fill="#39ff14"
+                    fill="#22c55e"
                     fontSize={12}
                     fontWeight="bold"
-                    style={{ filter: "drop-shadow(0 0 5px #39ff14)" }}
+                    style={{ filter: "drop-shadow(0 0 5px #22c55e)" }}
                   />
                 </ReferenceDot>
               </AreaChart>
@@ -288,7 +288,7 @@ export const Fomo = ({ content }: FomoProps) => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-border">
               <div>
-                <h4 className="text-[#39ff14] font-bold mb-1">
+                <h4 className="text-[#22c55e] font-bold mb-1">
                   {c.epochs?.now?.title}
                 </h4>
                 <p dangerouslySetInnerHTML={{ __html: c.epochs?.now?.text || "" }} />

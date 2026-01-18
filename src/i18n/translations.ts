@@ -324,15 +324,15 @@ export const translations = {
         epochs: {
           now: {
             title: "Сейчас (2025–2029)",
-            text: "Сеть выделяет <span class=\"text-white font-mono\">~323,000 GNK</span> в сутки на всех майнеров."
+            text: "Сеть выделяет <span class=\"text-primary font-mono\">~323,000 GNK</span> в сутки на всех майнеров."
           },
           halving1: {
             title: "После 1-го Халвинга (Авг 2029)",
-            text: "Выделяться будет уже <span class=\"text-white font-mono\">~161,500 GNK</span> в сутки."
+            text: "Выделяться будет уже <span class=\"text-primary font-mono\">~161,500 GNK</span> в сутки."
           },
           halving2: {
             title: "После 2-го Халвинга (Авг 2033)",
-            text: "Всего <span class=\"text-white font-mono\">~80,750 GNK</span> в сутки."
+            text: "Всего <span class=\"text-primary font-mono\">~80,750 GNK</span> в сутки."
           }
         }
       },
@@ -368,7 +368,7 @@ export const translations = {
           },
           {
             q: "Как вывести токены?",
-            a: "1. Вы отправляете запрос на вывод в нашем Telegram. 2. Мы переводим монеты на ваш кошелёк, указанный в запросе. 3. Перевод выполняется в течение 24 часов после получения заявки."
+            a: "1. Вы отправляете запрос на вывод через наш Telegram. 2. Мы переводим монеты на ваш кошелёк, указанный в запросе. 3. Перевод выполняется в течение 24 часов после получения заявки."
           },
           {
             q: "Как создать кошелёк?",
@@ -714,15 +714,15 @@ export const translations = {
         epochs: {
           now: {
             title: "Now (2025–2029)",
-            text: "Network allocates <span class=\"text-white font-mono\">~323,000 GNK</span> per day to all miners."
+            text: "Network allocates <span class=\"text-primary font-mono\">~323,000 GNK</span> per day to all miners."
           },
           halving1: {
             title: "After 1st Halving (Aug 2029)",
-            text: "Allocation drops to <span class=\"text-white font-mono\">~161,500 GNK</span> per day."
+            text: "Allocation drops to <span class=\"text-primary font-mono\">~161,500 GNK</span> per day."
           },
           halving2: {
             title: "After 2nd Halving (Aug 2033)",
-            text: "Allocation drops to <span class=\"text-white font-mono\">~80,750 GNK</span> per day."
+            text: "Allocation drops to <span class=\"text-primary font-mono\">~80,750 GNK</span> per day."
           }
         }
       },
@@ -1091,15 +1091,15 @@ export const translations = {
         epochs: {
           now: {
             title: "Ahora (2025–2029)",
-            text: "La red asigna <span class=\"text-white font-mono\">~323,000 GNK</span> por día a todos los mineros."
+            text: "La red asigna <span class=\"text-primary font-mono\">~323,000 GNK</span> por día a todos los mineros."
           },
           halving1: {
             title: "Después del 1er Halving (Ago 2029)",
-            text: "La asignación cae a <span class=\"text-white font-mono\">~161,500 GNK</span> por día."
+            text: "La asignación cae a <span class=\"text-primary font-mono\">~161,500 GNK</span> por día."
           },
           halving2: {
             title: "Después del 2do Halving (Ago 2033)",
-            text: "La asignación cae a <span class=\"text-white font-mono\">~80,750 GNK</span> por día."
+            text: "La asignación cae a <span class=\"text-primary font-mono\">~80,750 GNK</span> por día."
           }
         }
       },
@@ -1468,15 +1468,15 @@ export const translations = {
         epochs: {
           now: {
             title: "Jetzt (2025–2029)",
-            text: "Das Netzwerk weist <span class=\"text-white font-mono\">~323.000 GNK</span> pro Tag an alle Miner zu."
+            text: "Das Netzwerk weist <span class=\"text-primary font-mono\">~323.000 GNK</span> pro Tag an alle Miner zu."
           },
           halving1: {
             title: "Nach 1. Halving (Aug 2029)",
-            text: "Zuteilung sinkt auf <span class=\"text-white font-mono\">~161.500 GNK</span> pro Tag."
+            text: "Zuteilung sinkt auf <span class=\"text-primary font-mono\">~161.500 GNK</span> pro Tag."
           },
           halving2: {
             title: "Nach 2. Halving (Aug 2033)",
-            text: "Zuteilung sinkt auf <span class=\"text-white font-mono\">~80.750 GNK</span> pro Tag."
+            text: "Zuteilung sinkt auf <span class=\"text-primary font-mono\">~80.750 GNK</span> pro Tag."
           }
         }
       },
@@ -1845,15 +1845,15 @@ export const translations = {
         epochs: {
           now: {
             title: "现在 (2025–2029)",
-            text: "网络每天向所有矿工分配 <span class=\"text-white font-mono\">~323,000 GNK</span>。"
+            text: "网络每天向所有矿工分配 <span class=\"text-primary font-mono\">~323,000 GNK</span>。"
           },
           halving1: {
             title: "第一次减半后 (2029年8月)",
-            text: "分配降至每天 <span class=\"text-white font-mono\">~161,500 GNK</span>。"
+            text: "分配降至每天 <span class=\"text-primary font-mono\">~161,500 GNK</span>。"
           },
           halving2: {
             title: "第二次减半后 (2033年8月)",
-            text: "分配降至每天 <span class=\"text-white font-mono\">~80,750 GNK</span>。"
+            text: "分配降至每天 <span class=\"text-primary font-mono\">~80,750 GNK</span>。"
           }
         }
       },
@@ -2222,15 +2222,15 @@ export const translations = {
         epochs: {
           now: {
             title: "الآن (2025–2029)",
-            text: "تخصص الشبكة <span class=\"text-white font-mono\">~323,000 GNK</span> يوميًا لجميع المعدنين."
+            text: "تخصص الشبكة <span class=\"text-primary font-mono\">~323,000 GNK</span> يوميًا لجميع المعدنين."
           },
           halving1: {
             title: "بعد التنصيف الأول (أغسطس 2029)",
-            text: "ينخفض التخصيص إلى <span class=\"text-white font-mono\">~161,500 GNK</span> يوميًا."
+            text: "ينخفض التخصيص إلى <span class=\"text-primary font-mono\">~161,500 GNK</span> يوميًا."
           },
           halving2: {
             title: "بعد التنصيف الثاني (أغسطس 2033)",
-            text: "ينخفض التخصيص إلى <span class=\"text-white font-mono\">~80,750 GNK</span> يوميًا."
+            text: "ينخفض التخصيص إلى <span class=\"text-primary font-mono\">~80,750 GNK</span> يوميًا."
           }
         }
       },
