@@ -5,8 +5,10 @@ import { de } from './locales/de';
 import { zh } from './locales/zh';
 import { ar } from './locales/ar';
 
+import { applyTypography } from '../utils/applyTypography';
+
 export const translations = {
-  ru,
+  ru: applyTypography(ru, 'ru'),
   en,
   es,
   de,
