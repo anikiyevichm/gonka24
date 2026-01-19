@@ -172,7 +172,17 @@ async function main() {
     console.log(`Unit Price: ${unitPrice}`);
 
     // 6. Save to file
+    let existingStats = {};
+    if (fs.existsSync(STATS_FILE_PATH)) {
+      try {
+        existingStats = JSON.parse(fs.readFileSync(STATS_FILE_PATH, 'utf8'));
+      } catch (e) {
+        console.error('Error reading existing stats.json:', e);
+      }
+    }
+
     const statsData = {
+      ...existingStats,
       total_compute_power: totalComputePower,
       previous_epoch_reward: prevEpochRewardGNK,
       unit_price: unitPrice,

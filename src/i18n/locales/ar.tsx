@@ -546,11 +546,11 @@ export const ar = {
     pools: {
       light: {
         name: "Compute Light",
-        badge: "الوزن 300"
+        badge: "وزن البدء 300"
       },
       pro: {
         name: "Compute Pro",
-        badge: "الوزن 1500"
+        badge: "وزن البدء 1500"
       },
       premium: {
         name: "Compute Premium",
@@ -560,7 +560,7 @@ export const ar = {
     info: {
       min_deposit: "الحد الأدنى للإيداع:",
       max_deposit: "الحد الأقصى للإيداع:",
-      node_weight: "وزن العقدة:",
+      node_weight: "حصتك:",
       management_fee: "رسوم الإدارة:",
       base_yield: "العائد الأساسي (عقدة واحدة):",
       yield_per_day: "GNK/يوم"
@@ -576,7 +576,8 @@ export const ar = {
     results: {
       daily: "GNK في اليوم",
       monthly: "GNK في الشهر",
-      tooltip: "هذه أرقام تقريبية. قد تختلف القيم بشكل كبير بناءً على مضيفي الشبكة."
+      tooltip: "هذه أرقام تقريبية. قد تختلف القيم بشكل كبير بناءً على مضيفي الشبكة.",
+      disclaimer: "الحسابات تقريبية. بناءً على وزن الشبكة {weight} والمكافأة {reward} GNK في {date}."
     }
   }
 };

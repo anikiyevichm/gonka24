@@ -279,7 +279,7 @@ export const ru = {
             "$7 / час (на 30 дней)",
             "Management fee: 10%",
             "Примерный вес всей ноды - 1500",
-            "Мин взнос от 500$"
+            "Мин взнос от 2000$"
           ],
           cta: "Выбрать тариф",
         },
@@ -558,11 +558,11 @@ export const ru = {
     pools: {
       light: {
         name: "Compute Light",
-        badge: "Вес 300"
+        badge: "Вес для старта 300"
       },
       pro: {
         name: "Compute Pro",
-        badge: "Вес 1500"
+        badge: "Вес для старта 1500"
       },
       premium: {
         name: "Compute Premium",
@@ -572,7 +572,7 @@ export const ru = {
     info: {
       min_deposit: "Мин. взнос:",
       max_deposit: "Макс. взнос:",
-      node_weight: "Вес ноды:",
+      node_weight: "Ваша доля веса:",
       management_fee: "Management Fee:",
       base_yield: "Базовая доходность (1 нода):",
       yield_per_day: "GNK/день"
@@ -588,7 +588,8 @@ export const ru = {
     results: {
       daily: "GNK в день",
       monthly: "GNK в месяц",
-      tooltip: "Это примерные цифры. Значения могут значительно меняться исходя от хостов сети."
+      tooltip: "Это примерные цифры. Значения могут значительно меняться исходя от хостов сети.",
+      disclaimer: "Расчеты приблизительны. Основаны на весе сети {weight} и награде {reward} GNK на момент {date}."
     }
   }
 };

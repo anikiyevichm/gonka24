@@ -14,14 +14,13 @@ const POOL_CONFIG = {
     min: 250,
     max: 2000,
     nodePrice: 2000,
-    // nodeDailyGNK removed as we calculate dynamically
     weight: 300, 
     fee: 20,
     key: 'light'
   },
   2: {
     id: 2,
-    min: 500,
+    min: 2000,
     max: 5500,
     nodePrice: 5500,
     weight: 1500,
@@ -51,12 +50,12 @@ export function CalculatorPage() {
   const calcT = t.calculator;
 
   // Derived calculations
-  const { dailyGNK, monthlyGNK, errorMsg } = useMemo(() => {
+  const { dailyGNK, monthlyGNK, errorMsg, userWeight } = useMemo(() => {
     const amount = parseFloat(investment);
     const poolName = calcT.pools[config.key].name;
 
     if (!investment || isNaN(amount) || amount <= 0) {
-      return { dailyGNK: '0.00', monthlyGNK: '0.00', errorMsg: '' };
+      return { dailyGNK: '0.00', monthlyGNK: '0.00', errorMsg: '', userWeight: 0 };
     }
 
     if (amount < config.min) {
@@ -66,7 +65,8 @@ export function CalculatorPage() {
       return {
         dailyGNK: '0.00',
         monthlyGNK: '0.00',
-        errorMsg: msg
+        errorMsg: msg,
+        userWeight: 0
       };
     }
 
@@ -77,24 +77,33 @@ export function CalculatorPage() {
       return {
         dailyGNK: '0.00',
         monthlyGNK: '0.00',
-        errorMsg: msg
+        errorMsg: msg,
+        userWeight: 0
       };
     }
 
-    // New Logic: 1 USD = 7 Weight
-    // Fetch data from stats.json
-    // Calculate GNK per day => GNK per month
-    // Reduce management fee before calc GNK result
+    // New Logic
+    // Pools 1 & 2: Use implicit weight from config (share of node)
+    // Pool 3: Use 1 USD = 7 Weight
 
-    const userWeight = amount * 7;
+    let calculatedWeight = 0;
+
+    if (selectedPool === 3) {
+      // Premium Pool: 1 USD = 7 Weight (as per generic request)
+      calculatedWeight = amount * 7;
+    } else {
+      // Fixed Pools (Light/Pro): Proportion of the Node's defined weight
+      const poolWeight = typeof config.weight === 'number' ? config.weight : 0;
+      calculatedWeight = (amount / config.nodePrice) * poolWeight;
+    }
+
     const unitPrice = statsData.unit_price || 0;
     const epochsPerDay = statsData.epochs_per_day || 0;
 
-    // Raw Daily GNK = Weight * UnitPrice * EpochsPerDay
-    const rawDailyGNK = userWeight * unitPrice * epochsPerDay;
+    // Raw Daily GNK
+    const rawDailyGNK = calculatedWeight * unitPrice * epochsPerDay;
 
-    // Net Daily GNK = Raw - Fee
-    // "reduce management fee before calc gnk result" - taking literally as fee from rewards
+    // Net Daily GNK (Deduct Fee)
     const netDailyGNK = rawDailyGNK * (1 - config.fee / 100);
 
     const monthly = netDailyGNK * 30;
@@ -103,16 +112,19 @@ export function CalculatorPage() {
       dailyGNK: netDailyGNK.toFixed(2),
       monthlyGNK: monthly.toFixed(2),
       errorMsg: '',
+      userWeight: Math.floor(calculatedWeight) // Show integer for weight usually looks cleaner
     };
-  }, [investment, config, calcT]);
+  }, [investment, config, calcT, selectedPool]);
 
   // Calculate estimated yield for InfoRow if needed
   const renderBaseYield = () => {
-    if (selectedPool === 3) return null; // Premium usually custom
-    // Calculate for full node price
-    const weight = config.nodePrice * 7;
+    if (selectedPool === 3) return null;
+
+    // Calculate for full node using its specific weight
+    const weight = typeof config.weight === 'number' ? config.weight : 0;
     const unitPrice = statsData.unit_price || 0;
     const epochsPerDay = statsData.epochs_per_day || 0;
+
     const rawDaily = weight * unitPrice * epochsPerDay;
     const netDaily = rawDaily * (1 - config.fee / 100);
 
@@ -128,6 +140,14 @@ export function CalculatorPage() {
     { name: nav?.pricing || "Pricing", href: "/gnk-mining-infrastructure#pricing" },
     { name: nav?.faq || "FAQ", href: "/gnk-mining-infrastructure#faq-section" },
   ];
+
+  // Disclaimer formatting
+  const disclaimerText = calcT.results.disclaimer
+    ? calcT.results.disclaimer
+      .replace('{weight}', statsData.total_compute_power?.toLocaleString() || 'N/A')
+      .replace('{reward}', Math.round(statsData.previous_epoch_reward || 0).toLocaleString())
+      .replace('{date}', statsData.last_updated ? new Date(statsData.last_updated).toLocaleDateString() : 'N/A')
+    : "";
 
   return (
     <ContactModalProvider>
@@ -198,7 +218,10 @@ export function CalculatorPage() {
                   label={calcT.info.max_deposit}
                   value={config.max === Infinity ? '∞' : `$${config.max.toLocaleString()}`}
                 />
-                <InfoRow label={calcT.info.node_weight} value={config.weight.toString()} />
+                <InfoRow
+                  label={calcT.info.node_weight}
+                  value={userWeight > 0 ? userWeight.toLocaleString() : '-'}
+                />
                 <InfoRow label={calcT.info.management_fee} value={`${config.fee}%`} />
                 {renderBaseYield()}
               </div>
@@ -269,6 +292,11 @@ export function CalculatorPage() {
                 </div>
               </div>
 
+              {/* Disclaimer */}
+              <div className="mt-4 text-[10px] text-muted-foreground/60 text-center leading-tight px-4">
+                {disclaimerText}
+              </div>
+
             </div>
           </motion.div>
         </main>
@@ -278,8 +306,6 @@ export function CalculatorPage() {
     </ContactModalProvider>
   );
 }
-
-
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (

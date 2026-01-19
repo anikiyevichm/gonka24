@@ -546,11 +546,11 @@ export const zh = {
     pools: {
       light: {
         name: "Compute Light",
-        badge: "权重 300"
+        badge: "初始权重 300"
       },
       pro: {
         name: "Compute Pro",
-        badge: "权重 1500"
+        badge: "初始权重 1500"
       },
       premium: {
         name: "Compute Premium",
@@ -560,7 +560,7 @@ export const zh = {
     info: {
       min_deposit: "最低存款:",
       max_deposit: "最高存款:",
-      node_weight: "节点权重:",
+      node_weight: "您的份额:",
       management_fee: "管理费:",
       base_yield: "基础收益 (1 节点):",
       yield_per_day: "GNK/天"
@@ -576,7 +576,8 @@ export const zh = {
     results: {
       daily: "每日 GNK",
       monthly: "每月 GNK",
-      tooltip: "这些是近似数字。数值会根据网络主机有很大差异。"
+      tooltip: "这些是近似数字。数值会根据网络主机有很大差异。",
+      disclaimer: "计算仅供参考。基于网络权重 {weight} 和奖励 {reward} GNK 于 {date}。"
     }
   }
 };

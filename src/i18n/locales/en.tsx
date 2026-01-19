@@ -279,7 +279,7 @@ export const en = {
             "$7 / hour (for 30 days)",
             "Management fee: 10%",
             "Approx. node weight - 1500",
-            "Min entry from $500"
+            "Min entry from $2,000"
           ],
           cta: "Select Plan",
         },
@@ -558,11 +558,11 @@ export const en = {
     pools: {
       light: {
         name: "Compute Light",
-        badge: "Weight 300"
+        badge: "Start Weight 300"
       },
       pro: {
         name: "Compute Pro",
-        badge: "Weight 1500"
+        badge: "Start Weight 1500"
       },
       premium: {
         name: "Compute Premium",
@@ -572,7 +572,7 @@ export const en = {
     info: {
       min_deposit: "Min deposit:",
       max_deposit: "Max deposit:",
-      node_weight: "Node weight:",
+      node_weight: "Your share:",
       management_fee: "Management Fee:",
       base_yield: "Base yield (1 node):",
       yield_per_day: "GNK/day"
@@ -588,7 +588,8 @@ export const en = {
     results: {
       daily: "GNK per day",
       monthly: "GNK per month",
-      tooltip: "These are approximate figures. Values differ significantly based on network hosts."
+      tooltip: "These are approximate figures. Values differ significantly based on network hosts.",
+      disclaimer: "Calculations are approximate. Based on network weight {weight} and reward {reward} GNK on {date}."
     }
   }
 };

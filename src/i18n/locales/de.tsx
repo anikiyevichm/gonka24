@@ -546,11 +546,11 @@ export const de = {
     pools: {
       light: {
         name: "Compute Light",
-        badge: "Gewicht 300"
+        badge: "Startgewicht 300"
       },
       pro: {
         name: "Compute Pro",
-        badge: "Gewicht 1500"
+        badge: "Startgewicht 1500"
       },
       premium: {
         name: "Compute Premium",
@@ -560,7 +560,7 @@ export const de = {
     info: {
       min_deposit: "Min. Einzahlung:",
       max_deposit: "Max. Einzahlung:",
-      node_weight: "Knotengewicht:",
+      node_weight: "Ihr Anteil:",
       management_fee: "Managementgebühr:",
       base_yield: "Basisrendite (1 Knoten):",
       yield_per_day: "GNK/Tag"
@@ -576,7 +576,8 @@ export const de = {
     results: {
       daily: "GNK pro Tag",
       monthly: "GNK pro Monat",
-      tooltip: "Dies sind ungefähre Zahlen. Die Werte unterscheiden sich je nach Netzwerk-Hosts erheblich."
+      tooltip: "Dies sind ungefähre Zahlen. Die Werte unterscheiden sich je nach Netzwerk-Hosts erheblich.",
+      disclaimer: "Berechnungen sind Schätzungen. Basiert auf Netzwerkgewicht {weight} und Belohnung {reward} GNK am {date}."
     }
   }
 };
