@@ -266,7 +266,7 @@ export const zh = {
         medium: {
           tag: "推荐",
           name: "计算 +",
-          price: "$1,000",
+          price: "$500",
           period: "最低",
           features: ["管理费：20%", "10% 收益", "最佳选择"],
           cta: "选择计划",

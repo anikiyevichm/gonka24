@@ -17,7 +17,7 @@ const POOL_CONFIG = {
   },
   2: {
     id: 2,
-    min: 2000,
+    min: 500,
     max: 5500,
     nodePrice: 5500,
     weight: 1500,
@@ -29,7 +29,7 @@ const POOL_CONFIG = {
     min: 10000,
     max: Infinity,
     nodePrice: 10000,
-    weight: '∞',
+    weight: 3000,
     fee: 5,
     key: 'premium'
   },
@@ -79,20 +79,14 @@ export function CalculatorSection() {
       };
     }
 
-    // New Logic
-    // Pools 1 & 2: Use implicit weight from config (share of node)
-    // Pool 3: Use 1 USD = 7 Weight
+    // Weight Calculation: Use implicit weight from config (share of node)
+    // Formula: (Invested Amount / Node Price) * Node Weight
 
-    let calculatedWeight = 0;
+    // For Premium: 10,000 / 10,000 * 3000 = 3000 weight (0.3 weight/$)
+    // For Pro: 5,500 / 5,500 * 1500 = 1500 weight (~0.27 weight/$)
 
-    if (selectedPool === 3) {
-      // Premium Pool: 1 USD = 7 Weight (as per generic request)
-      calculatedWeight = amount * 7;
-    } else {
-      // Fixed Pools (Light/Pro): Proportion of the Node's defined weight
-      const poolWeight = typeof config.weight === 'number' ? config.weight : 0;
-      calculatedWeight = (amount / config.nodePrice) * poolWeight;
-    }
+    const poolWeight = typeof config.weight === 'number' ? config.weight : 0;
+    const calculatedWeight = (amount / config.nodePrice) * poolWeight;
 
     const unitPrice = statsData.unit_price || 0;
     const epochsPerDay = statsData.epochs_per_day || 0;

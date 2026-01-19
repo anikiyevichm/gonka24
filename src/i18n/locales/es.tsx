@@ -266,7 +266,7 @@ export const es = {
         medium: {
           tag: "RECOMENDADO",
           name: "Compute +",
-          price: "$1,000",
+          price: "$500",
           period: "entrada mín",
           features: ["Fee de Gestión: 20%", "10% Beneficio", "Elección Óptima"],
           cta: "Seleccionar Plan",

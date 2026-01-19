@@ -279,7 +279,7 @@ export const en = {
             "$7 / hour (for 30 days)",
             "Management fee: 10%",
             "Approx. node weight - 1500",
-            "Min entry from $2,000"
+            "Min entry from $500"
           ],
           cta: "Select Plan",
         },

@@ -266,7 +266,7 @@ export const ar = {
         medium: {
           tag: "موصى به",
           name: "Compute +",
-          price: "$1,000",
+          price: "$500",
           period: "الحد الأدنى",
           features: ["رسوم الإدارة: 20%", "فائدة 10%", "الخيار الأمثل"],
           cta: "اختر الخطة",
