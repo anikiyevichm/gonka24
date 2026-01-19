@@ -574,7 +574,7 @@ export const en = {
     info: {
       min_deposit: "Min deposit:",
       max_deposit: "Max deposit:",
-      node_weight: "Your share:",
+      node_weight: "Your weight:",
       management_fee: "Management Fee:",
       yield_per_day: "GNK/day"
     },

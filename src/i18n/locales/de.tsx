@@ -562,7 +562,7 @@ export const de = {
     info: {
       min_deposit: "Min. Einzahlung:",
       max_deposit: "Max. Einzahlung:",
-      node_weight: "Ihr Anteil:",
+      node_weight: "Ihr Gewicht:",
       management_fee: "Managementgebühr:",
       yield_per_day: "GNK/Tag"
     },

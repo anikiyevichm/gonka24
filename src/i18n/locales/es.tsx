@@ -562,7 +562,7 @@ export const es = {
     info: {
       min_deposit: "Depósito mín.:",
       max_deposit: "Depósito máx.:",
-      node_weight: "Tu participación:",
+      node_weight: "Tu peso:",
       management_fee: "Tarifa de gestión:",
       yield_per_day: "GNK/día"
     },

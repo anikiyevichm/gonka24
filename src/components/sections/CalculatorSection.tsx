@@ -79,14 +79,8 @@ export function CalculatorSection() {
       };
     }
 
-    // Weight Calculation: Use implicit weight from config (share of node)
-    // Formula: (Invested Amount / Node Price) * Node Weight
-
-    // For Premium: 10,000 / 10,000 * 3000 = 3000 weight (0.3 weight/$)
-    // For Pro: 5,500 / 5,500 * 1500 = 1500 weight (~0.27 weight/$)
-
-    const poolWeight = typeof config.weight === 'number' ? config.weight : 0;
-    const calculatedWeight = (amount / config.nodePrice) * poolWeight;
+    // Weight Calculation: Fixed 0.233 weight per 1 USD
+    const calculatedWeight = amount * 0.233;
 
     const unitPrice = statsData.unit_price || 0;
     const epochsPerDay = statsData.epochs_per_day || 0;

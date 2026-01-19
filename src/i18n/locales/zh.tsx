@@ -562,7 +562,7 @@ export const zh = {
     info: {
       min_deposit: "最低存款:",
       max_deposit: "最高存款:",
-      node_weight: "您的份额:",
+      node_weight: "您的权重:",
       management_fee: "管理费:",
       yield_per_day: "GNK/天"
     },

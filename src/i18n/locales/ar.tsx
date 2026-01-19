@@ -562,7 +562,7 @@ export const ar = {
     info: {
       min_deposit: "الحد الأدنى للإيداع:",
       max_deposit: "الحد الأقصى للإيداع:",
-      node_weight: "حصتك:",
+      node_weight: "وزنك:",
       management_fee: "رسوم الإدارة:",
       yield_per_day: "GNK/يوم"
     },

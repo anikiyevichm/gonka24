@@ -574,7 +574,7 @@ export const ru = {
     info: {
       min_deposit: "Мин. взнос:",
       max_deposit: "Макс. взнос:",
-      node_weight: "Ваша доля веса:",
+      node_weight: "Ваш вес:",
       management_fee: "Management Fee:",
       yield_per_day: "GNK/день"
     },
