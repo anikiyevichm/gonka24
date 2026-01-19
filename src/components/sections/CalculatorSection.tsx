@@ -124,7 +124,7 @@ export function CalculatorSection() {
     : "";
 
   return (
-    <section className="container mx-auto px-4 py-12 flex flex-col items-center justify-center">
+    <section id="calc" className="container mx-auto px-4 py-12 flex flex-col items-center justify-center">
       <motion.header
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

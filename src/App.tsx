@@ -3,10 +3,12 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { SafeComputeLanding } from './pages/SafeComputeLanding';
 
 import { CalculatorPage } from './pages/CalculatorPage';
+import { ScrollToAnchor } from './components/utils/ScrollToAnchor';
 
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToAnchor />
       <Routes>
         <Route path="/gnk-mining-infrastructure" element={<SafeComputeLanding />} />
         <Route path="/calc" element={<CalculatorPage />} />
