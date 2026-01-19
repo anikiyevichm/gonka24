@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header } from '../components/ui/Header';
-import { Background3D } from '../components/ui/Background3D';
+import CloudBackground from '../components/ui/CloudBackground';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Hero } from '../components/sections/Hero';
 import { AboutSafeCompute } from '../components/sections/AboutSafeCompute';
@@ -34,7 +34,7 @@ export function SafeComputeLanding() {
   return (
     <ContactModalProvider>
       <div className="min-h-screen font-sans selection:bg-primary/30 relative text-foreground">
-        <Background3D />
+        <CloudBackground />
         <Header customLinks={navLinks} />
         <main className="relative z-10">
           <Hero content={content?.hero} />
