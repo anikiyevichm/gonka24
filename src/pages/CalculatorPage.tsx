@@ -5,6 +5,7 @@ import { Background3D } from '../components/ui/Background3D';
 import { useLanguage } from '../contexts/LanguageContext';
 import { ContactModalProvider } from '../contexts/ContactModalContext';
 import { Info } from 'lucide-react';
+import statsData from '../data/stats.json';
 
 // Pool Configuration
 const POOL_CONFIG = {
@@ -13,8 +14,8 @@ const POOL_CONFIG = {
     min: 250,
     max: 2000,
     nodePrice: 2000,
-    nodeDailyGNK: 24,
-    weight: 300,
+    // nodeDailyGNK removed as we calculate dynamically
+    weight: 300, 
     fee: 20,
     key: 'light'
   },
@@ -23,7 +24,6 @@ const POOL_CONFIG = {
     min: 500,
     max: 5500,
     nodePrice: 5500,
-    nodeDailyGNK: 120,
     weight: 1500,
     fee: 10,
     key: 'pro'
@@ -33,7 +33,6 @@ const POOL_CONFIG = {
     min: 10000,
     max: Infinity,
     nodePrice: 10000,
-    nodeDailyGNK: 229.09,
     weight: '∞',
     fee: 5,
     key: 'premium'
@@ -82,16 +81,45 @@ export function CalculatorPage() {
       };
     }
 
-    const shareOfNode = amount / config.nodePrice;
-    const daily = shareOfNode * config.nodeDailyGNK;
-    const monthly = daily * 30;
+    // New Logic: 1 USD = 7 Weight
+    // Fetch data from stats.json
+    // Calculate GNK per day => GNK per month
+    // Reduce management fee before calc GNK result
+
+    const userWeight = amount * 7;
+    const unitPrice = statsData.unit_price || 0;
+    const epochsPerDay = statsData.epochs_per_day || 0;
+
+    // Raw Daily GNK = Weight * UnitPrice * EpochsPerDay
+    const rawDailyGNK = userWeight * unitPrice * epochsPerDay;
+
+    // Net Daily GNK = Raw - Fee
+    // "reduce management fee before calc gnk result" - taking literally as fee from rewards
+    const netDailyGNK = rawDailyGNK * (1 - config.fee / 100);
+
+    const monthly = netDailyGNK * 30;
 
     return {
-      dailyGNK: daily.toFixed(2),
+      dailyGNK: netDailyGNK.toFixed(2),
       monthlyGNK: monthly.toFixed(2),
       errorMsg: '',
     };
   }, [investment, config, calcT]);
+
+  // Calculate estimated yield for InfoRow if needed
+  const renderBaseYield = () => {
+    if (selectedPool === 3) return null; // Premium usually custom
+    // Calculate for full node price
+    const weight = config.nodePrice * 7;
+    const unitPrice = statsData.unit_price || 0;
+    const epochsPerDay = statsData.epochs_per_day || 0;
+    const rawDaily = weight * unitPrice * epochsPerDay;
+    const netDaily = rawDaily * (1 - config.fee / 100);
+
+    return (
+      <InfoRow label={calcT.info.base_yield} value={`~${netDaily.toFixed(2)} ${calcT.info.yield_per_day}`} />
+    );
+  };
 
   // @ts-ignore
   const nav = t.header.safecompute_nav;
@@ -172,9 +200,7 @@ export function CalculatorPage() {
                 />
                 <InfoRow label={calcT.info.node_weight} value={config.weight.toString()} />
                 <InfoRow label={calcT.info.management_fee} value={`${config.fee}%`} />
-                {selectedPool !== 3 && (
-                  <InfoRow label={calcT.info.base_yield} value={`~${config.nodeDailyGNK} ${calcT.info.yield_per_day}`} />
-                )}
+                {renderBaseYield()}
               </div>
 
               {/* Input Section */}
@@ -193,8 +219,8 @@ export function CalculatorPage() {
                     onChange={(e) => setInvestment(e.target.value)}
                     placeholder={calcT.input.placeholder}
                     className={`w-full bg-background pl-10 pr-5 py-4 text-xl font-bold border-2 rounded-2xl outline-none transition-all duration-300 placeholder:text-muted-foreground/50 placeholder:font-normal ${errorMsg
-                        ? 'border-destructive focus:border-destructive focus:ring-4 focus:ring-destructive/10'
-                        : 'border-input focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10'
+                      ? 'border-destructive focus:border-destructive focus:ring-4 focus:ring-destructive/10'
+                      : 'border-input focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10'
                       }`}
                   />
                 </div>
@@ -252,6 +278,8 @@ export function CalculatorPage() {
     </ContactModalProvider>
   );
 }
+
+
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
