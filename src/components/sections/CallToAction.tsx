@@ -50,7 +50,7 @@ export const CallToAction = () => {
 
           <button
             onClick={() => openContactModal()}
-            className="px-10 py-5 bg-primary text-black font-bold text-xl rounded-lg hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_30px_rgba(34,197,94,0.5)] active:scale-95 flex items-center gap-3 mx-auto"
+            className="px-10 py-5 bg-primary text-primary-foreground font-bold text-xl rounded-lg hover:bg-primary/90 transition-all shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_30px_rgba(34,197,94,0.5)] active:scale-95 flex items-center gap-3 mx-auto"
           >
             {t.cta_section.button}
             <ArrowRight className="w-6 h-6" />

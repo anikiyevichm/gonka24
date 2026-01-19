@@ -11,6 +11,7 @@ import { Fomo } from '../components/sections/Fomo';
 import { SafeComputeFAQ } from '../components/sections/SafeComputeFAQ';
 import { TokenomicsSection } from '../components/sections/TokenomicsSection';
 import { FinalCTA } from '../components/sections/FinalCTA';
+import { CalculatorSection } from '../components/sections/CalculatorSection';
 
 import { ContactModalProvider } from '../contexts/ContactModalContext';
 
@@ -42,6 +43,7 @@ export function SafeComputeLanding() {
           <ProblemSolution content={content?.problem_solution} />
 
           <Pricing content={content?.pricing} />
+          <CalculatorSection />
           <Process content={content?.how_it_works} />
           <Fomo content={content?.fomo} />
           <TokenomicsSection content={content?.tokenomics_section} />

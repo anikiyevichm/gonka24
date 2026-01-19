@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useContactModal } from "../../contexts/ContactModalContext";
 import { useLanguage } from "../../contexts/LanguageContext";
 
+import { Link } from "react-router-dom";
+
 interface HeaderProps {
   customLinks?: { name: string; href: string }[];
 }
@@ -126,10 +128,10 @@ export const Header = ({ customLinks }: HeaderProps) => {
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-primary font-mono font-bold text-xl tracking-tighter cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
+        <Link to="/" className="flex items-center gap-2 text-primary font-mono font-bold text-xl tracking-tighter cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
           <SafeComputeIcon className="w-8 h-8 md:w-10 md:h-10 text-primary" />
           <span>Safe<span className="text-foreground">Compute</span></span>
-        </div>
+        </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
@@ -145,7 +147,7 @@ export const Header = ({ customLinks }: HeaderProps) => {
           <LanguageSwitcher />
           <button
             onClick={openContactModal}
-            className="bg-primary text-black px-5 py-2 rounded font-bold hover:bg-primary/90 transition-transform active:scale-95"
+            className="bg-primary text-primary-foreground px-5 py-2 rounded font-bold hover:bg-primary/90 transition-transform active:scale-95"
           >
             {t.header.cta}
           </button>
@@ -186,7 +188,7 @@ export const Header = ({ customLinks }: HeaderProps) => {
                   openContactModal();
                   setIsMobileMenuOpen(false);
                 }}
-                className="bg-primary text-black px-5 py-3 rounded font-bold w-full"
+                className="bg-primary text-primary-foreground px-5 py-3 rounded font-bold w-full"
               >
                 {t.header.cta}
               </button>

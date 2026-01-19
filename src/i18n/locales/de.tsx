@@ -550,11 +550,13 @@ export const de = {
       },
       pro: {
         name: "Compute Pro",
-        badge: "Startgewicht 1500"
+        badge: "Startgewicht 1500",
+        discount_badge: "-10%"
       },
       premium: {
         name: "Compute Premium",
-        badge: "Gewicht ∞"
+        badge: "Gewicht ∞",
+        discount_badge: "-15%"
       }
     },
     info: {
@@ -562,7 +564,6 @@ export const de = {
       max_deposit: "Max. Einzahlung:",
       node_weight: "Ihr Anteil:",
       management_fee: "Managementgebühr:",
-      base_yield: "Basisrendite (1 Knoten):",
       yield_per_day: "GNK/Tag"
     },
     input: {

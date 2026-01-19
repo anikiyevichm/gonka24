@@ -550,11 +550,13 @@ export const zh = {
       },
       pro: {
         name: "Compute Pro",
-        badge: "初始权重 1500"
+        badge: "初始权重 1500",
+        discount_badge: "-10%"
       },
       premium: {
         name: "Compute Premium",
-        badge: "权重 ∞"
+        badge: "权重 ∞",
+        discount_badge: "-15%"
       }
     },
     info: {
@@ -562,7 +564,6 @@ export const zh = {
       max_deposit: "最高存款:",
       node_weight: "您的份额:",
       management_fee: "管理费:",
-      base_yield: "基础收益 (1 节点):",
       yield_per_day: "GNK/天"
     },
     input: {

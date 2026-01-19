@@ -562,11 +562,13 @@ export const ru = {
       },
       pro: {
         name: "Compute Pro",
-        badge: "Вес для старта 1500"
+        badge: "Вес для старта 1500",
+        discount_badge: "-10%"
       },
       premium: {
         name: "Compute Premium",
-        badge: "Вес ∞"
+        badge: "Вес ∞",
+        discount_badge: "-15%"
       }
     },
     info: {
@@ -574,7 +576,6 @@ export const ru = {
       max_deposit: "Макс. взнос:",
       node_weight: "Ваша доля веса:",
       management_fee: "Management Fee:",
-      base_yield: "Базовая доходность (1 нода):",
       yield_per_day: "GNK/день"
     },
     input: {

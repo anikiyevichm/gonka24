@@ -39,7 +39,7 @@ export const TokenomicsSection = ({ content }: TokenomicsSectionProps) => {
               href={content.link_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-black rounded-xl transition-all group shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground rounded-xl transition-all group shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:scale-105"
             >
               <FileText className="w-5 h-5" />
               <span className="font-bold">{content.link_text}</span>

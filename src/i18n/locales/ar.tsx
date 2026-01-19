@@ -550,11 +550,13 @@ export const ar = {
       },
       pro: {
         name: "Compute Pro",
-        badge: "وزن البدء 1500"
+        badge: "وزن البدء 1500",
+        discount_badge: "-10%"
       },
       premium: {
         name: "Compute Premium",
-        badge: "الوزن ∞"
+        badge: "الوزن ∞",
+        discount_badge: "-15%"
       }
     },
     info: {
@@ -562,7 +564,6 @@ export const ar = {
       max_deposit: "الحد الأقصى للإيداع:",
       node_weight: "حصتك:",
       management_fee: "رسوم الإدارة:",
-      base_yield: "العائد الأساسي (عقدة واحدة):",
       yield_per_day: "GNK/يوم"
     },
     input: {

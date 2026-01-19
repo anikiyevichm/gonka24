@@ -50,7 +50,7 @@ export const FinalCTA = ({ content }: FinalCTAProps) => {
 
               <button
                 onClick={() => openContactModal()}
-                className="px-10 py-4 bg-primary text-black font-bold text-lg rounded-xl hover:bg-primary/90 transition-all flex items-center gap-2 transform hover:scale-105 shadow-[0_0_20px_rgba(34,197,94,0.3)]"
+                className="px-10 py-4 bg-primary text-primary-foreground font-bold text-lg rounded-xl hover:bg-primary/90 transition-all flex items-center gap-2 transform hover:scale-105 shadow-[0_0_20px_rgba(34,197,94,0.3)]"
               >
                 {content.button}
                 <ArrowRight className="w-5 h-5" />
