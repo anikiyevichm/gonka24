@@ -83,7 +83,7 @@ export function CalculatorSection() {
     const calculatedWeight = amount * 0.233;
 
     const unitPrice = statsData.unit_price || 0;
-    const epochsPerDay = statsData.epochs_per_day || 0;
+    const epochsPerDay = 1;
 
     // Raw Daily GNK
     const rawDailyGNK = calculatedWeight * unitPrice * epochsPerDay;
