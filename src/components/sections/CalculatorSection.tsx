@@ -99,7 +99,7 @@ export function CalculatorSection() {
       errorMsg: '',
       userWeight: Math.floor(calculatedWeight) // Show integer for weight usually looks cleaner
     };
-  }, [investment, config, calcT, selectedPool]);
+  }, [investment, config, calcT]);
 
 
 
