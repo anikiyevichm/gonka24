@@ -1,8 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { Info } from 'lucide-react';
-import statsData from '../../data/stats.json';
 
 // Pool Configuration
 const POOL_CONFIG = {
@@ -37,10 +36,30 @@ const POOL_CONFIG = {
 
 type PoolId = keyof typeof POOL_CONFIG;
 
+interface StatsData {
+  unit_price: number;
+  total_compute_power: number;
+  previous_epoch_reward: number;
+  last_updated: string;
+}
+
 export function CalculatorSection() {
   const { t } = useLanguage();
   const [selectedPool, setSelectedPool] = useState<PoolId>(2);
   const [investment, setInvestment] = useState<string>(''); // Keep as string for input handling
+  const [stats, setStats] = useState<StatsData>({
+    unit_price: 0,
+    total_compute_power: 0,
+    previous_epoch_reward: 0,
+    last_updated: ''
+  });
+
+  useEffect(() => {
+    fetch('https://raw.githubusercontent.com/anikiyevichm/gonka24/refs/heads/main/src/data/stats.json')
+      .then(res => res.json())
+      .then(data => setStats(prev => ({ ...prev, ...data })))
+      .catch(err => console.error('Failed to fetch stats:', err));
+  }, []);
 
   const config = POOL_CONFIG[selectedPool];
   // @ts-ignore
@@ -82,7 +101,7 @@ export function CalculatorSection() {
     // Weight Calculation: Fixed 0.233 weight per 1 USD
     const calculatedWeight = amount * 0.233;
 
-    const unitPrice = statsData.unit_price || 0;
+    const unitPrice = stats.unit_price || 0;
     const epochsPerDay = 1;
 
     // Raw Daily GNK
@@ -99,16 +118,16 @@ export function CalculatorSection() {
       errorMsg: '',
       userWeight: Math.floor(calculatedWeight) // Show integer for weight usually looks cleaner
     };
-  }, [investment, config, calcT]);
+  }, [investment, config, calcT, stats]);
 
 
 
   // Disclaimer formatting
   const disclaimerText = calcT.results.disclaimer
     ? calcT.results.disclaimer
-      .replace('{weight}', statsData.total_compute_power?.toLocaleString() || 'N/A')
-      .replace('{reward}', Math.round(statsData.previous_epoch_reward || 0).toLocaleString())
-      .replace('{date}', statsData.last_updated ? new Date(statsData.last_updated).toLocaleDateString() : 'N/A')
+      .replace('{weight}', stats.total_compute_power?.toLocaleString() || 'N/A')
+      .replace('{reward}', Math.round(stats.previous_epoch_reward || 0).toLocaleString())
+      .replace('{date}', stats.last_updated ? new Date(stats.last_updated).toLocaleDateString() : 'N/A')
     : "";
 
   return (
