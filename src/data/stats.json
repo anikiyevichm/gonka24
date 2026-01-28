@@ -1,9 +1,9 @@
 {
-  "total_compute_power": 6454398,
-  "previous_epoch_reward": 300786.985010454,
-  "unit_price": 0.04660186511746781,
-  "epochs_per_day": 5.613670326814372,
-  "last_updated": "2026-01-28T00:18:42.874Z",
+  "total_compute_power": 7386027,
+  "previous_epoch_reward": 300644.14511971,
+  "unit_price": 0.04070444707549945,
+  "epochs_per_day": 1.1033157088864722,
+  "last_updated": "2026-01-28T08:06:23.902Z",
   "node_config": {
     "light": {
       "weight": 300,
